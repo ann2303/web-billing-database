@@ -4,7 +4,7 @@
 ![Биллинговая_система (1)](https://user-images.githubusercontent.com/93032454/154475552-beb5d6ce-befd-443d-8f41-8cb732c4935a.png)
 
 **Схема страниц**
-![Blank diagram (5)](https://user-images.githubusercontent.com/93032454/154475586-0a37951a-cc8e-4c6c-9452-6c43eb36058c.png)
+![Blank diagram (6)](https://user-images.githubusercontent.com/93032454/154864830-3bd0f1cb-8372-4b07-8e66-e2470b06072d.png)
 
 **Описание страниц**\
 Меню:
