@@ -4,7 +4,7 @@
 ![Биллинговая_система (1)](https://user-images.githubusercontent.com/93032454/154475552-beb5d6ce-befd-443d-8f41-8cb732c4935a.png)
 
 **Схема страниц**
-![Blank diagram (6)](https://user-images.githubusercontent.com/93032454/154864830-3bd0f1cb-8372-4b07-8e66-e2470b06072d.png)
+![Blank diagram (7)](https://user-images.githubusercontent.com/93032454/154864908-bec009e4-4111-4484-b9e5-9398c38535dc.png)
 
 **Описание страниц**\
 Меню:
@@ -12,6 +12,7 @@
 - Клиенты
 - Номера телефонов
 - Журнал списаний и зачислений
+На всех страницах есть доступ к меню.\
 1) Главная страница
 - Таблица услуг
 2) Услуги
