@@ -6,7 +6,6 @@ import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.Period;
-import java.util.Set;
 
 @Entity
 @Table(name = "Услуга")
@@ -16,32 +15,32 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "Наименование")
     private String name;
 
     @Column(name = "Абонентская плата (в месяц)")
-    private Double payPerMounth;
+    private double payPerMounth;
 
     @Column(name = "Абонентская плата (в день)")
-    private Double payPerDay;
+    private double payPerDay;
 
     @Column(name = "Срок действия")
     private Period duration;
 
     @Column(name = "Стоимость подключения")
-    private Double startCost;
+    private double startCost;
 
     @Type(type = "jsonb")
     @Column(name = "Состав")
     private JsonNode structure; // возможно придется писать класс
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -53,19 +52,19 @@ public class Service {
         this.name = name;
     }
 
-    public Double getPayPerMounth() {
+    public double getPayPerMounth() {
         return payPerMounth;
     }
 
-    public void setPayPerMounth(Double payPerMounth) {
+    public void setPayPerMounth(double payPerMounth) {
         this.payPerMounth = payPerMounth;
     }
 
-    public Double getPayPerDay() {
+    public double getPayPerDay() {
         return payPerDay;
     }
 
-    public void setPayPerDay(Double payPerDay) {
+    public void setPayPerDay(double payPerDay) {
         this.payPerDay = payPerDay;
     }
 
@@ -77,11 +76,11 @@ public class Service {
         this.duration = duration;
     }
 
-    public Double getStartCost() {
+    public double getStartCost() {
         return startCost;
     }
 
-    public void setStartCost(Double startCost) {
+    public void setStartCost(double startCost) {
         this.startCost = startCost;
     }
 
@@ -93,8 +92,5 @@ public class Service {
         this.structure = structure;
     }
 
-    public Set<ServiceHistory> getHistories() {
-
-    }
 }
 
