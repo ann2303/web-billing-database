@@ -10,12 +10,12 @@ public class Transactions {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @ManyToOne(targetEntity = Number.class)
     @JoinColumn(name = "number")
     @Column(name = "number")
-    private long number;
+    private Long number;
 
     @Column(name = "type")
     private String type;
@@ -26,19 +26,19 @@ public class Transactions {
     @Column(name = "transaction_time")
     private Time time;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(long number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 

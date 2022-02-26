@@ -10,17 +10,17 @@ public class ServiceHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @ManyToOne(targetEntity = Service.class)
     @JoinColumn(name = "id")
     @Column(name = "service_id")
-    private long serviceId;
+    private Long serviceId;
 
     @ManyToOne(targetEntity = Number.class)
     @JoinColumn(name = "number")
     @Column(name = "number")
-    private long number;
+    private Long number;
 
     @Column(name = "connection_time")
     private Time startTime;
@@ -31,27 +31,27 @@ public class ServiceHistory {
     @Column(name = "payment_plan")
     private Period paymentPlan;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getServiceId() {
+    public Long getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(long serviceId) {
+    public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
     }
 
-    public long getNumber() {
+    public Long getNumber() {
         return number;
     }
 
-    public void setNumber(long number) {
+    public void setNumber(Long number) {
         this.number = number;
     }
 

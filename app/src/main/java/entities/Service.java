@@ -15,7 +15,7 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -36,11 +36,11 @@ public class Service {
     @Column(name = "structure")
     private JsonNode structure; // возможно придется писать класс
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
