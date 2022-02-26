@@ -4,25 +4,25 @@ import javax.persistence.*;
 import java.time.Period;
 
 @Entity
-@Table(name = "Номер")
+@Table(name = "number")
 public class Number {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "номер")
+    @Column(name = "number")
     private long id;
 
     @ManyToOne(targetEntity = Client.class)
     @JoinColumn(name = "id")
-    @Column(name = "id клиента")
+    @Column(name = "client_id")
     private long clientId;
 
-    @Column(name = "баланс")
+    @Column(name = "balance")
     private double balance;
 
-    @Column(name = "максимальный кредит")
+    @Column(name = "max_credit")
     private double maxCredit;
 
-    @Column(name = "срок погашения")
+    @Column(name = "payment_period")
     private Period duePeriod;
 
     public long getId() {

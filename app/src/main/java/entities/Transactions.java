@@ -13,17 +13,17 @@ public class Transactions {
     private long id;
 
     @ManyToOne(targetEntity = Number.class)
-    @JoinColumn(name = "номер")
-    @Column(name = "номер")
+    @JoinColumn(name = "number")
+    @Column(name = "number")
     private long number;
 
-    @Column(name = "тип транзакции")
+    @Column(name = "type")
     private String type;
 
-    @Column(name = "сумма")
+    @Column(name = "sum")
     private double sum;
 
-    @Column(name = "время транзакции")
+    @Column(name = "transaction_time")
     private Time time;
 
     public long getId() {

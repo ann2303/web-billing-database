@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.time.Period;
 
 @Entity
-@Table(name = "Услуга")
+@Table(name = "service")
 @TypeDef(name = "jsonb", typeClass = JsonNode.class)
 public class Service {
 
@@ -17,23 +17,23 @@ public class Service {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "Наименование")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Абонентская плата (в месяц)")
+    @Column(name = "subscription_fee_month")
     private double payPerMounth;
 
-    @Column(name = "Абонентская плата (в день)")
+    @Column(name = "subscription_fee_day")
     private double payPerDay;
 
-    @Column(name = "Срок действия")
+    @Column(name = "validity")
     private Period duration;
 
-    @Column(name = "Стоимость подключения")
+    @Column(name = "connection_cost")
     private double startCost;
 
     @Type(type = "jsonb")
-    @Column(name = "Состав")
+    @Column(name = "structure")
     private JsonNode structure; // возможно придется писать класс
 
     public long getId() {

@@ -5,7 +5,7 @@ import java.sql.Time;
 import java.time.Period;
 
 @Entity
-@Table(name = "История услуг")
+@Table(name = "service_history")
 public class ServiceHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,21 +14,21 @@ public class ServiceHistory {
 
     @ManyToOne(targetEntity = Service.class)
     @JoinColumn(name = "id")
-    @Column(name = "id услуги")
+    @Column(name = "service_id")
     private long serviceId;
 
     @ManyToOne(targetEntity = Number.class)
-    @JoinColumn(name = "номер")
-    @Column(name = "номер")
+    @JoinColumn(name = "number")
+    @Column(name = "number")
     private long number;
 
-    @Column(name = "время подключения")
+    @Column(name = "connection_time")
     private Time startTime;
 
-    @Column(name = "время отключения")
+    @Column(name = "disconnection_time")
     private Time endTime;
 
-    @Column(name = "план оплаты")
+    @Column(name = "payment_plan")
     private Period paymentPlan;
 
     public long getId() {

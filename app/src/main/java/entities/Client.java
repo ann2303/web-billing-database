@@ -3,7 +3,7 @@ package entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Клиент")
+@Table(name = "client")
 public class Client {
 
     @Id
@@ -11,13 +11,13 @@ public class Client {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "Имя")
+    @Column(name = "fcn")
     private String name;
 
-    @Column(name = "Тип")
+    @Column(name = "type")
     private String type;
 
-    @Column(name = "Адрес")
+    @Column(name = "address")
     private String address;
 
     @Column(name = "e-mail")
