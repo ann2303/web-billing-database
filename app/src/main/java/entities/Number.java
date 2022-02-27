@@ -8,10 +8,10 @@ import java.time.Period;
 public class Number {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "number")
+    @Column(name = "number_id")
     private Long id;
 
-    @ManyToOne(targetEntity = Client.class)
+    @JoinTable(name = "client")
     @JoinColumn(name = "id")
     @Column(name = "client_id")
     private Long clientId;

@@ -12,13 +12,13 @@ public class ServiceHistory {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(targetEntity = Service.class)
+    @JoinTable(name = "service")
     @JoinColumn(name = "id")
     @Column(name = "service_id")
     private Long serviceId;
 
-    @ManyToOne(targetEntity = Number.class)
-    @JoinColumn(name = "number")
+    @JoinTable(name = "number")
+    @JoinColumn(name = "number_id")
     @Column(name = "number")
     private Long number;
 

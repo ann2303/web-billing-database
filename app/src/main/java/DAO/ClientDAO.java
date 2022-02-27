@@ -26,15 +26,19 @@ public class ClientDAO implements DAO<Client, Long> {
             return new ArrayList<>();
         }
 
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        String sql;
-        sql = "select id, fcn, type, address, email from client where " + field + " like :log";
-        Query query = session.createSQLQuery(sql)
-                .addEntity(Client.class)
-                .setParameter("log", filter);
-        List<Client> clients = query.list();
-        session.close();
-        return clients;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            String sql;
+            sql = "select id, fcn, type, address, email from client where " + field + " like :log";
+            Query query = session.createSQLQuery(sql)
+                    .addEntity(Client.class)
+                    .setParameter("log", filter);
+            List<Client> clients = query.list();
+            session.close();
+            return clients;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

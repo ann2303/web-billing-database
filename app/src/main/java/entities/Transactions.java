@@ -12,8 +12,8 @@ public class Transactions {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(targetEntity = Number.class)
-    @JoinColumn(name = "number")
+    @JoinTable(name = "number")
+    @JoinColumn(name = "number_id")
     @Column(name = "number")
     private Long number;
 

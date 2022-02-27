@@ -20,7 +20,7 @@ public class Client {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "e-mail")
+    @Column(name = "\"e-mail\"")
     private String email;
 
     public Long getId() {

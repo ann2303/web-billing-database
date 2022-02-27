@@ -33,6 +33,7 @@ public class Service {
     private double startCost;
 
     @Type(type = "jsonb")
+    @Transient
     @Column(name = "structure")
     private JsonNode structure; // возможно придется писать класс
 
