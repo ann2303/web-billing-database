@@ -1,8 +1,15 @@
 package DAO;
 
+import com.google.common.collect.Lists;
 import entities.Client;
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import util.HibernateUtil;
+
+import java.util.List;
+
 
 class ClientDAOTest {
 
@@ -16,7 +23,9 @@ class ClientDAOTest {
     }
 
     @Test
-    void filterByField() {
-
+    void filterTest() {
+        List<Client> result = clientDAO.filter("nameFilter",
+                Lists.newArrayList("%Анастасия%"));
+        Assert.assertEquals(2, result.size());
     }
 }

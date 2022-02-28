@@ -7,9 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ClientDAO implements DAO<Client, Long> {
 
@@ -20,19 +20,17 @@ public class ClientDAO implements DAO<Client, Long> {
         return client;
     }
 
-    public List<Client> filterByField(String field, Filter filter) {
-
-        if (!clientFields.contains(field)) {
-            return new ArrayList<>();
-        }
+    public List<Client> filter(String filterName, List parameters) {
 
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            String sql;
-            sql = "select id, fcn, type, address, email from client where " + field + " like :log";
-            Query query = session.createSQLQuery(sql)
-                    .addEntity(Client.class)
-                    .setParameter("log", filter);
+            Filter enableFilter = session.enableFilter(filterName);
+            Set<String> paramNames = enableFilter.getFilterDefinition().getParameterNames();
+            AtomicInteger i = new AtomicInteger();
+            paramNames.forEach(name ->
+                enableFilter.setParameter(name, parameters.get(i.getAndIncrement()))
+            );
+            Query query = session.createQuery("select id, name, address, type, email from entities.Client");
             List<Client> clients = query.list();
             session.close();
             return clients;

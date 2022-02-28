@@ -1,8 +1,14 @@
 package entities;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
+
 import javax.persistence.*;
 
 @Entity
+@FilterDef(name = "nameFilter", parameters = @ParamDef(name = "nameParam", type = "java.lang.String"))
+@Filter(name = "nameFilter", condition = "fcn like :nameParam")
 @Table(name = "client")
 public class Client {
 
