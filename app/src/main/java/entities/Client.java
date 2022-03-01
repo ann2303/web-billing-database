@@ -5,7 +5,6 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @FilterDef(name = "nameFilter", parameters = @ParamDef(name = "nameParam", type = "java.lang.String"))
 @Filter(name = "nameFilter", condition = "fcn like :nameParam")

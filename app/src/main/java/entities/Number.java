@@ -1,18 +1,27 @@
 package entities;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterJoinTable;
+import org.hibernate.annotations.ParamDef;
+
 import javax.persistence.*;
 import java.time.Period;
+
+@FilterDef(name = "number_idFilter", parameters = @ParamDef(name = "number_idParam", type = "java.lang.String"))
+@Filter(name = "number_idFilter", condition = "number_id = :number_idParam")
+@FilterDef(name = "nameFilter", parameters = @ParamDef(name = "nameParam", type = "java.lang.String"))
 
 @Entity
 @Table(name = "number")
 public class Number {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "number_id")
     private Long id;
 
     @JoinTable(name = "client")
     @JoinColumn(name = "id")
+    @FilterJoinTable(name = "nameFilter", condition = "fcn like :nameParam")
     @Column(name = "client_id")
     private Long clientId;
 
@@ -22,8 +31,14 @@ public class Number {
     @Column(name = "max_credit")
     private double maxCredit;
 
-    @Column(name = "payment_period")
-    private Period duePeriod;
+    public Number(Long id, Long clientId, double balance, double maxCredit) {
+        this.id = id;
+        this.clientId = clientId;
+        this.balance = balance;
+        this.maxCredit = maxCredit;
+    }
+
+    public Number() {}
 
     public Long getId() {
         return id;
@@ -57,11 +72,4 @@ public class Number {
         this.maxCredit = maxCredit;
     }
 
-    public Period getDuePeriod() {
-        return duePeriod;
-    }
-
-    public void setDuePeriod(Period duePeriod) {
-        this.duePeriod = duePeriod;
-    }
 }

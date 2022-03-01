@@ -1,25 +1,22 @@
 package entities;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.time.Period;
+
 
 @FilterDef(name = "nameFilter", parameters = @ParamDef(name = "nameParam", type = "java.lang.String"))
 @Filter(name = "nameFilter", condition = "name like :nameParam")
 @FilterDef(name = "typeFilter", parameters = @ParamDef(name = "typeParam", type = "java.lang.String"))
-@Filter(name = "typeFilter", condition = "structure->:typeParam IS NOT NULL")
+@Filter(name = "typeFilter", condition = "structure like '%:typeParam%'")
 
 @Entity
 @Table(name = "service")
-@TypeDef(name = "jsonb", typeClass = JsonNode.class)
 public class Service {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -27,31 +24,38 @@ public class Service {
     private String name;
 
     @Column(name = "subscription_fee_month")
-    private double payPerMounth;
+    private Double payPerMounth;
 
     @Column(name = "subscription_fee_day")
-    private double payPerDay;
-
-    @Column(name = "validity")
-    private Period duration;
+    private Double payPerDay;
 
     @Column(name = "connection_cost")
     private double startCost;
 
-    @Type(type = "jsonb")
-    @Transient
     @Column(name = "structure")
-    private JsonNode structure; // возможно придется писать класс
+    private String structure;
 
     public Service(Long id, String name, double payPerMounth, double payPerDay,
-                   Period duration, double startCost, JsonNode structure) {
+                   double startCost, String structure) {
         this.id = id;
         this.name = name;
         this.payPerMounth = payPerMounth;
         this.payPerDay = payPerDay;
-        this.duration = duration;
         this.startCost = startCost;
         this.structure = structure;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj.getClass() != this.getClass()) { return false; }
+        final Service other = (Service) obj;
+        return (this.id == other.id) &&
+                (this.name.equals(other.name)) &&
+                (this.payPerMounth.equals(other.payPerMounth)) &&
+                (this.payPerDay.equals(other.payPerDay)) &&
+                (this.startCost == startCost) &&
+                (this.structure.equals(other.structure));
     }
 
     public Service() {}
@@ -88,14 +92,6 @@ public class Service {
         this.payPerDay = payPerDay;
     }
 
-    public Period getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Period duration) {
-        this.duration = duration;
-    }
-
     public double getStartCost() {
         return startCost;
     }
@@ -104,11 +100,11 @@ public class Service {
         this.startCost = startCost;
     }
 
-    public JsonNode getStructure() {
+    public String getStructure() {
         return structure;
     }
 
-    public void setStructure(JsonNode structure) {
+    public void setStructure(String structure) {
         this.structure = structure;
     }
 

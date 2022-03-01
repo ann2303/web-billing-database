@@ -1,32 +1,33 @@
 package DAO;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Service;
-import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
-import util.HibernateUtil;
-
-import java.time.Period;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.util.Assert.*;
 
 class ServiceDAOTest {
 
     ServiceDAO serviceDAO = new ServiceDAO();
 
     @Test
-    void createTest() throws JsonProcessingException {
-        String json = "{ \"Интернет\" : \"500\" } ";
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(json);
-        Service entity = new Service(Long.valueOf(89), "Интернет500",
-                500, 5, Period.of(0, 1, 0), 0, jsonNode);
+    void createTest() {
+        String structure = "Интернет : 500";
+        Service entity = new Service(89L, "Интернет500",
+                500, 5, 0, structure);
         serviceDAO.create(entity);
-        Service service = serviceDAO.getServiceById(Long.valueOf(89));
-        Assert.notNull(service);
+        Service service = serviceDAO.getEntityById(89L, Service.class);
+        notNull(service);
+    }
+
+    @Test
+    void updateTest() {
+        String structure = "Интернет : 700";
+        Service entity = new Service(89L, "Интернет700",
+                600, 5, 0, structure);
+        serviceDAO.update(entity);
+        Service service = serviceDAO.getEntityById(89L, Service.class);
+        assertEquals(service, entity);
     }
 
 }
