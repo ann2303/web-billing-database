@@ -5,10 +5,12 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.ParamDef;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-@Entity
 @FilterDef(name = "nameFilter", parameters = @ParamDef(name = "nameParam", type = "java.lang.String"))
 @Filter(name = "nameFilter", condition = "fcn like :nameParam")
+
+@Entity
 @Table(name = "client")
 public class Client {
 
@@ -39,6 +41,27 @@ public class Client {
 
     public String getName() {
         return name;
+    }
+
+    public Client(Long id, String name, String type, String address, String email) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.address = address;
+        this.email = email;
+    }
+
+    public Client() {}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj.getClass() != this.getClass()) { return false; }
+        final Client other = (Client) obj;
+        return (this.id == other.id) &&
+                (this.type.equals(other.type)) &&
+                (this.address.equals(other.address)) &&
+                (this.email.equals(other.email));
     }
 
     public void setName(String name) {

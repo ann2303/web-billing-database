@@ -1,11 +1,17 @@
 package entities;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.Period;
+
+@FilterDef(name = "nameFilter", parameters = @ParamDef(name = "nameParam", type = "java.lang.String"))
+@Filter(name = "nameFilter", condition = "name like :nameParam")
+@FilterDef(name = "typeFilter", parameters = @ParamDef(name = "typeParam", type = "java.lang.String"))
+@Filter(name = "typeFilter", condition = "structure->:typeParam IS NOT NULL")
 
 @Entity
 @Table(name = "service")
@@ -36,6 +42,19 @@ public class Service {
     @Transient
     @Column(name = "structure")
     private JsonNode structure; // возможно придется писать класс
+
+    public Service(Long id, String name, double payPerMounth, double payPerDay,
+                   Period duration, double startCost, JsonNode structure) {
+        this.id = id;
+        this.name = name;
+        this.payPerMounth = payPerMounth;
+        this.payPerDay = payPerDay;
+        this.duration = duration;
+        this.startCost = startCost;
+        this.structure = structure;
+    }
+
+    public Service() {}
 
     public Long getId() {
         return id;
