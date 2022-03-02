@@ -22,11 +22,10 @@ public class Number {
     @Column(name = "number_id")
     private Long id;
 
-    @JoinTable(name = "client")
+    @ManyToOne(targetEntity = Client.class)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @FilterJoinTable(name = "nameFilter", condition = "fcn like :nameParam")
-    @Column(name = "client_id")
-    private Long clientId;
+    private Client owner;
 
     @Column(name = "balance")
     private double balance;
@@ -36,7 +35,7 @@ public class Number {
 
     public Number(Long id, Long clientId, double balance, double maxCredit) {
         this.id = id;
-        this.clientId = clientId;
+        this.owner.setId(clientId);
         this.balance = balance;
         this.maxCredit = maxCredit;
     }
