@@ -21,8 +21,8 @@ class ClientDAOTest {
 
     @Test
     void filterTest() {
-        List<Client> result = clientDAO.filter("nameFilter",
-                Lists.newArrayList("%Анастасия%"), Client.class);
+        List<Client> result = clientDAO.filter(Map.of("nameFilter",
+                Lists.newArrayList("%Анастасия%")), Client.class);
         result.forEach(client -> Assert.assertTrue(client.getName().contains("Анастасия")));
     }
 
@@ -31,6 +31,11 @@ class ClientDAOTest {
         List<Client> result = clientDAO.sort(Map.of("name", "asc"), Client.class);
         List<Client> check = Lists.newArrayList(result);
         check.sort(Comparator.comparing(Client::getName));
+        Assert.assertEquals(result, check);
+
+        result = clientDAO.sort(Map.of("name", "desc"), Client.class);
+        check = Lists.newArrayList(result);
+        check.sort(Comparator.comparing(Client::getName).reversed());
         Assert.assertEquals(result, check);
     }
 }

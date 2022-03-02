@@ -5,6 +5,7 @@ import org.hibernate.Filter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
+import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.query.Query;
 import util.HibernateUtil;
 
@@ -18,58 +19,42 @@ public interface DAO<E, K> {
 
     default E update(E entity) {
 
-        try {
-            if (Objects.isNull(entity)) {
-                return entity;
-            }
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            session.update(entity);
-            transaction.commit();
-            session.close();
-        } catch (Exception e) {
-            System.out.println("An exception was thrown during the update of "
-                    + entity.getClass().getName() + ": " + e.getMessage());
+        if (Objects.isNull(entity)) {
+            return entity;
         }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
         return entity;
     }
 
     default boolean delete(E entity) {
 
-        try {
-            if (Objects.isNull(entity)) {
-                return false;
-            }
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            session.delete(entity);
-            transaction.commit();
-            session.close();
-            return true;
-        } catch (Exception e) {
-            System.out.println("An exception was thrown during deletion of "
-                    + entity.getClass().getName() + ": " + e.getMessage());
+        if (Objects.isNull(entity)) {
             return false;
         }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(entity);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     default boolean create(E entity) {
 
-        try {
-            if (Objects.isNull(entity)) {
-                return false;
-            }
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            session.save(entity);
-            transaction.commit();
-            session.close();
-            return true;
-        } catch (Exception e) {
-            System.out.println("An exception was thrown during creation of "
-                    + entity.getClass().getName() + ": " + e.getMessage());
+        if (Objects.isNull(entity)) {
             return false;
         }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(entity);
+        transaction.commit();
+        session.close();
+        return true;
+
     }
 
     default E getEntityById(Long id, Class persistentClass) {
@@ -79,25 +64,26 @@ public interface DAO<E, K> {
         return entity;
     }
 
-    default List<E> filter(String filterName, List parameters, Class persistentClass) {
+    default List<E> filter(Map<String,List> filters, Class persistentClass) {
 
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        filters.entrySet().forEach(entry -> {
+            String filterName = entry.getKey();
+            List parameters = entry.getValue();
             Filter enableFilter = session.enableFilter(filterName);
             Set<String> paramNames = enableFilter.getFilterDefinition().getParameterNames();
             AtomicInteger i = new AtomicInteger();
             paramNames.forEach(name ->
                     enableFilter.setParameter(name, parameters.get(i.getAndIncrement()))
             );
-            Query query = session.createQuery("from " + persistentClass.getName());
+        });
 
-            @SuppressWarnings("unchecked")
-            List<E> result = query.list();
-            session.close();
-            return result;
-        } catch (Exception e) {
-            return null;
-        }
+        Query query = session.createQuery("from " + persistentClass.getName());
+
+        @SuppressWarnings("unchecked")
+        List<E> result = query.list();
+        session.close();
+        return result;
     }
 
     default List<E> sort(Map<String, String> order, Class persistentClass) {
@@ -112,6 +98,5 @@ public interface DAO<E, K> {
         });
         return criteria.list();
     }
-
 
 }

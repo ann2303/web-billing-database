@@ -1,10 +1,30 @@
 package entities;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
-import java.sql.Time;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.sql.Timestamp;
+
+@FilterDefs({
+                @FilterDef(name = "timeFilter",
+                    parameters = {
+                        @ParamDef(name = "minParam", type = "java.sql.Timestamp"),
+                        @ParamDef(name = "maxParam", type = "java.sql.Timestamp")
+                }),
+                @FilterDef(name = "numberFilter", parameters =
+                    @ParamDef(name = "numberParam", type = "java.lang.Long"))
+        })
+
+@Filters({
+        @Filter(name = "timeFilter", condition = "transaction_time between :minParam and :maxParam"),
+        @Filter(name = "numberFilter", condition = "number = :numberParam")
+})
+
 
 @Entity
-@Table(name = "Транзакции")
+@Table(name = "transactions")
 public class Transactions {
 
     @Id
@@ -12,57 +32,52 @@ public class Transactions {
     @Column(name = "id")
     private Long id;
 
-    @JoinTable(name = "number")
-    @JoinColumn(name = "number_id")
-    @Column(name = "number")
-    private Long number;
-
     @Column(name = "type")
     private String type;
 
     @Column(name = "sum")
-    private double sum;
+    private Double sum;
+
+    @JoinTable(name = "number")
+    @JoinColumn(name = "number", referencedColumnName = "number_id")
+    @Column(name = "number")
+    Long number;
 
     @Column(name = "transaction_time")
-    private Time time;
+    private Timestamp time;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Transactions(Long id, Long number, String type, Double sum, Timestamp time) {
         this.id = id;
-    }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    public void setNumber(Long number) {
         this.number = number;
+        this.type = type;
+        this.sum = sum;
+        this.time = time;
+    }
+
+    public Transactions() {}
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj.getClass() != this.getClass()) { return false; }
+        final Transactions other = (Transactions) obj;
+        return (this.id.equals(other.id)) &&
+                (this.type.equals(other.type)) &&
+                (this.sum.equals(other.sum)) &&
+                (this.number.equals(other.number)) &&
+                (this.time.equals(other.time));
     }
 
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public double getSum() {
+    public Double getSum() {
         return sum;
     }
 
-    public void setSum(double sum) {
-        this.sum = sum;
-    }
-
-    public Time getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
-    }
 }

@@ -57,7 +57,7 @@ public class Client {
         if (obj == null) { return false; }
         if (obj.getClass() != this.getClass()) { return false; }
         final Client other = (Client) obj;
-        return (this.id == other.id) &&
+        return (this.id.equals(other.id)) &&
                 (this.type.equals(other.type)) &&
                 (this.address.equals(other.address)) &&
                 (this.email.equals(other.email));
