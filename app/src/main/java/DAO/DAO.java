@@ -22,16 +22,12 @@ public interface DAO<E, K> {
         if (Objects.isNull(entity)) {
             return entity;
         }
-        try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            session.update(entity);
-            transaction.commit();
-            session.close();
-            return entity;
-        } catch (Exception e) {
-            return entity;
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(entity);
+        transaction.commit();
+        session.close();
+        return entity;
     }
 
     default boolean delete(E entity) {
