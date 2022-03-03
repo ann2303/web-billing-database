@@ -22,12 +22,16 @@ public interface DAO<E, K> {
         if (Objects.isNull(entity)) {
             return entity;
         }
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(entity);
-        transaction.commit();
-        session.close();
-        return entity;
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            session.update(entity);
+            transaction.commit();
+            session.close();
+            return entity;
+        } catch (Exception e) {
+            return entity;
+        }
     }
 
     default boolean delete(E entity) {
@@ -55,6 +59,17 @@ public interface DAO<E, K> {
         session.close();
         return true;
 
+    }
+
+    default List<E> getAll(Class persistentClass) {
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery("from " + persistentClass.getName());
+
+        @SuppressWarnings("unchecked")
+        List<E> result = query.list();
+        session.close();
+        return result;
     }
 
     default E getEntityById(Long id, Class persistentClass) {

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > DAO</title>
+  <title>Coverage Report > NumberDAO</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/highlight-idea.css";
@@ -20,7 +20,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">DAO</a>
 </div>
 
-<h1>Coverage Summary for Class: DAO (DAO)</h1>
+<h1>Coverage Summary for Class: NumberDAO (DAO)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -39,7 +39,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">DAO</td>
+  <td class="name">NumberDAO</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -53,15 +53,15 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (9/9)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    78.5%
+    100%
   </span>
   <span class="absValue">
-    (51/65)
+    (1/1)
   </span>
 </td>
 </tr>
@@ -75,106 +75,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package DAO;
 <i class="no-highlight">2</i>&nbsp;
-<i class="no-highlight">3</i>&nbsp;import org.hibernate.Criteria;
-<i class="no-highlight">4</i>&nbsp;import org.hibernate.Filter;
-<i class="no-highlight">5</i>&nbsp;import org.hibernate.Session;
-<i class="no-highlight">6</i>&nbsp;import org.hibernate.Transaction;
-<i class="no-highlight">7</i>&nbsp;import org.hibernate.criterion.Order;
-<i class="no-highlight">8</i>&nbsp;import org.hibernate.exception.ConstraintViolationException;
-<i class="no-highlight">9</i>&nbsp;import org.hibernate.query.Query;
-<i class="no-highlight">10</i>&nbsp;import util.HibernateUtil;
-<i class="no-highlight">11</i>&nbsp;
-<i class="no-highlight">12</i>&nbsp;import java.util.List;
-<i class="no-highlight">13</i>&nbsp;import java.util.Map;
-<i class="no-highlight">14</i>&nbsp;import java.util.Objects;
-<i class="no-highlight">15</i>&nbsp;import java.util.Set;
-<i class="no-highlight">16</i>&nbsp;import java.util.concurrent.atomic.AtomicInteger;
-<i class="no-highlight">17</i>&nbsp;
-<i class="no-highlight">18</i>&nbsp;public interface DAO&lt;E, K&gt; {
-<i class="no-highlight">19</i>&nbsp;
-<i class="no-highlight">20</i>&nbsp;    default E update(E entity) {
-<b class="nc"><i class="no-highlight">21</i>&nbsp;</b>
-<b class="fc"><i class="no-highlight">22</i>&nbsp;        if (Objects.isNull(entity)) {</b>
-<b class="nc"><i class="no-highlight">23</i>&nbsp;            return entity;</b>
-<b class="nc"><i class="no-highlight">24</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">25</i>&nbsp;        Session session = HibernateUtil.getSessionFactory().openSession();</b>
-<b class="fc"><i class="no-highlight">26</i>&nbsp;        Transaction transaction = session.beginTransaction();</b>
-<b class="fc"><i class="no-highlight">27</i>&nbsp;        session.update(entity);</b>
-<b class="fc"><i class="no-highlight">28</i>&nbsp;        transaction.commit();</b>
-<b class="fc"><i class="no-highlight">29</i>&nbsp;        session.close();</b>
-<b class="fc"><i class="no-highlight">30</i>&nbsp;        return entity;</b>
-<i class="no-highlight">31</i>&nbsp;    }
-<i class="no-highlight">32</i>&nbsp;
-<i class="no-highlight">33</i>&nbsp;    default boolean delete(E entity) {
-<b class="nc"><i class="no-highlight">34</i>&nbsp;</b>
-<b class="fc"><i class="no-highlight">35</i>&nbsp;        if (Objects.isNull(entity)) {</b>
-<b class="nc"><i class="no-highlight">36</i>&nbsp;            return false;</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">38</i>&nbsp;        Session session = HibernateUtil.getSessionFactory().openSession();</b>
-<b class="fc"><i class="no-highlight">39</i>&nbsp;        Transaction transaction = session.beginTransaction();</b>
-<b class="fc"><i class="no-highlight">40</i>&nbsp;        session.delete(entity);</b>
-<b class="fc"><i class="no-highlight">41</i>&nbsp;        transaction.commit();</b>
-<b class="fc"><i class="no-highlight">42</i>&nbsp;        session.close();</b>
-<b class="fc"><i class="no-highlight">43</i>&nbsp;        return true;</b>
-<i class="no-highlight">44</i>&nbsp;    }
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;    default boolean create(E entity) {
-<b class="nc"><i class="no-highlight">47</i>&nbsp;</b>
-<b class="fc"><i class="no-highlight">48</i>&nbsp;        if (Objects.isNull(entity)) {</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;            return false;</b>
-<b class="nc"><i class="no-highlight">50</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">51</i>&nbsp;        Session session = HibernateUtil.getSessionFactory().openSession();</b>
-<b class="fc"><i class="no-highlight">52</i>&nbsp;        Transaction transaction = session.beginTransaction();</b>
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        session.save(entity);</b>
-<b class="fc"><i class="no-highlight">54</i>&nbsp;        transaction.commit();</b>
-<b class="fc"><i class="no-highlight">55</i>&nbsp;        session.close();</b>
-<b class="fc"><i class="no-highlight">56</i>&nbsp;        return true;</b>
-<i class="no-highlight">57</i>&nbsp;
-<i class="no-highlight">58</i>&nbsp;    }
-<b class="nc"><i class="no-highlight">59</i>&nbsp;</b>
-<b class="nc"><i class="no-highlight">60</i>&nbsp;    default E getEntityById(Long id, Class persistentClass) {</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;        Session session = HibernateUtil.getSessionFactory().openSession();</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;        E entity = (E) session.get(persistentClass, id);</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;        session.close();</b>
-<b class="fc"><i class="no-highlight">64</i>&nbsp;        return entity;</b>
-<i class="no-highlight">65</i>&nbsp;    }
-<i class="no-highlight">66</i>&nbsp;
-<b class="fc"><i class="no-highlight">67</i>&nbsp;    default List&lt;E&gt; filter(Map&lt;String,List&gt; filters, Class persistentClass) {</b>
-<b class="fc"><i class="no-highlight">68</i>&nbsp;</b>
-<b class="fc"><i class="no-highlight">69</i>&nbsp;        Session session = HibernateUtil.getSessionFactory().openSession();</b>
-<b class="fc"><i class="no-highlight">70</i>&nbsp;        filters.entrySet().forEach(entry -&gt; {</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;            String filterName = entry.getKey();</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;            List parameters = entry.getValue();</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;            Filter enableFilter = session.enableFilter(filterName);</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;            Set&lt;String&gt; paramNames = enableFilter.getFilterDefinition().getParameterNames();</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;            AtomicInteger i = new AtomicInteger();</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;            paramNames.forEach(name -&gt;</b>
-<b class="fc"><i class="no-highlight">77</i>&nbsp;                    enableFilter.setParameter(name, parameters.get(i.getAndIncrement()))</b>
-<i class="no-highlight">78</i>&nbsp;            );
-<b class="fc"><i class="no-highlight">79</i>&nbsp;        });</b>
-<i class="no-highlight">80</i>&nbsp;
-<b class="fc"><i class="no-highlight">81</i>&nbsp;        Query query = session.createQuery(&quot;from &quot; + persistentClass.getName());</b>
-<b class="fc"><i class="no-highlight">82</i>&nbsp;</b>
-<b class="fc"><i class="no-highlight">83</i>&nbsp;        @SuppressWarnings(&quot;unchecked&quot;)</b>
-<b class="fc"><i class="no-highlight">84</i>&nbsp;        List&lt;E&gt; result = query.list();</b>
-<b class="fc"><i class="no-highlight">85</i>&nbsp;        session.close();</b>
-<b class="fc"><i class="no-highlight">86</i>&nbsp;        return result;</b>
-<i class="no-highlight">87</i>&nbsp;    }
-<b class="nc"><i class="no-highlight">88</i>&nbsp;</b>
-<b class="nc"><i class="no-highlight">89</i>&nbsp;    default List&lt;E&gt; sort(Map&lt;String, String&gt; order, Class persistentClass) {</b>
-<b class="fc"><i class="no-highlight">90</i>&nbsp;        Session session = HibernateUtil.getSessionFactory().openSession();</b>
-<b class="fc"><i class="no-highlight">91</i>&nbsp;        Criteria criteria = session.createCriteria(persistentClass, &quot;CRITERIA&quot;);</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;        order.forEach((key, value) -&gt; {</b>
-<b class="fc"><i class="no-highlight">93</i>&nbsp;            if (value.equals(&quot;asc&quot;)) {</b>
-<b class="fc"><i class="no-highlight">94</i>&nbsp;                criteria.addOrder(Order.asc(key));</b>
-<b class="fc"><i class="no-highlight">95</i>&nbsp;            } else if (value.equals(&quot;desc&quot;)) {</b>
-<b class="fc"><i class="no-highlight">96</i>&nbsp;                criteria.addOrder(Order.desc(key));</b>
-<b class="nc"><i class="no-highlight">97</i>&nbsp;            }</b>
-<i class="no-highlight">98</i>&nbsp;        });
-<b class="fc"><i class="no-highlight">99</i>&nbsp;        return criteria.list();</b>
-<i class="no-highlight">100</i>&nbsp;    }
-<i class="no-highlight">101</i>&nbsp;
-<i class="no-highlight">102</i>&nbsp;}
+<i class="no-highlight">3</i>&nbsp;import entities.Number;
+<i class="no-highlight">4</i>&nbsp;
+<b class="fc"><i class="no-highlight">5</i>&nbsp;public class NumberDAO implements DAO&lt;Number, Long&gt; {</b>
+<i class="no-highlight">6</i>&nbsp;
+<i class="no-highlight">7</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -201,7 +106,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-03-03 00:48</div>
+    <div style="float:right;">generated on 2022-03-03 16:53</div>
 </div>
 </body>
 </html>

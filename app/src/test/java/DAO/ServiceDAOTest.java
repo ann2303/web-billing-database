@@ -34,10 +34,10 @@ class ServiceDAOTest {
     @Test
     void updateTest() {
         String structure = "Интернет : 700";
-        Service entity = new Service(89L, "Интернет700",
+        Service entity = new Service(1L, "Интернет700",
                 600, 5, 0, structure);
         serviceDAO.update(entity);
-        Service service = serviceDAO.getEntityById(89L, Service.class);
+        Service service = serviceDAO.getEntityById(1L, Service.class);
         assertEquals(service, entity);
     }
 
