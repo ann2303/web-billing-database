@@ -16,7 +16,7 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private Long id = null;
 
     @Column(name = "fcn")
     private String name;
@@ -40,6 +40,13 @@ public class Client {
 
     public String getName() {
         return name;
+    }
+
+    public Client(String name, String type, String address, String email) {
+        this.name = name;
+        this.type = type;
+        this.address = address;
+        this.email = email;
     }
 
     public Client(Long id, String name, String type, String address, String email) {
