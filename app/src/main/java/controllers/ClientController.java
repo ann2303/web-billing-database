@@ -3,13 +3,10 @@ package controllers;
 import DAO.ClientDAO;
 import entities.Client;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 public class ClientController {
@@ -29,13 +26,14 @@ public class ClientController {
 
         try {
             ClientDAO clientDAO = new ClientDAO();
-//        Long id = clientDAO.getAll(Client.class).stream()
-//                .map(Client::getId)
-//                .max(Long::compareTo).orElse(1L);
-//        Client client = new Client(id, fcn, type, address, email);
-            Client client = new Client(fcn, type, address, email);
+            Long id = clientDAO.getAll(Client.class).stream()
+                    .map(Client::getId)
+                    .max(Long::compareTo).orElse(1L);
+            Client client = new Client(id, fcn, type, address, email);
+//            Client client = new Client(fcn, type, address, email);
             clientDAO.create(client);
-            return "Client created successful.\n";
+            modelAndView.addObject("client", client);
+            return "client";
         } catch (Exception e) {
             return "Can't create client.\n";
         }
