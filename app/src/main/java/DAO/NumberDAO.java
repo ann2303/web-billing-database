@@ -2,6 +2,5 @@ package DAO;
 
 import entities.Number;
 
-public class NumberDAO implements DAO<Number, Long> {
-
+public interface NumberDAO extends DAO<Number, Long> {
 }

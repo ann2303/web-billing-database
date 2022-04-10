@@ -1,11 +1,10 @@
 package entities;
 
-import DAO.NumberDAO;
-import DAO.ServiceDAO;
+import DAO.NumberDAOImpl;
+import DAO.ServiceDAOImpl;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.time.Period;
 
 @Entity
 @Table(name = "service_history")
@@ -32,9 +31,9 @@ public class ServiceHistory {
     public ServiceHistory(Long id, Long service_id, Long number_id, Time startTime, Time endTime) {
 
         this.id = id;
-        ServiceDAO serviceDAO = new ServiceDAO();
+        ServiceDAOImpl serviceDAO = new ServiceDAOImpl();
         this.service = serviceDAO.getEntityById(service_id, Service.class);
-        NumberDAO numberDAO = new NumberDAO();
+        NumberDAOImpl numberDAO = new NumberDAOImpl();
         this.number = numberDAO.getEntityById(number_id, Number.class);
         this.startTime = startTime;
         this.endTime = endTime;

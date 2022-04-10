@@ -8,11 +8,11 @@ import java.util.List;
 
 class ServiceHistoryDAOTest {
 
-    ServiceHistoryDAO serviceHistoryDAO = new ServiceHistoryDAO();
+    ServiceHistoryDAOImpl serviceHistoryDAOImpl = new ServiceHistoryDAOImpl();
 
     @Test
     public void getAllTest() {
-        List<ServiceHistory> all = serviceHistoryDAO.getAll(ServiceHistory.class);
+        List<ServiceHistory> all = serviceHistoryDAOImpl.getAll(ServiceHistory.class);
         Assert.assertNotNull(all);
     }
 
