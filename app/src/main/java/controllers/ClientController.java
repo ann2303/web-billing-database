@@ -21,25 +21,32 @@ public class ClientController {
         return "client";
     }
 
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(Model model) {
+        return "registration";
+    }
+
     @RequestMapping(value = "/add_client", method = RequestMethod.GET)
     public String addClient(@RequestParam(name = "fcn", required = true) String fcn,
                             @RequestParam(name = "type") String type,
                             @RequestParam(name = "address") String address,
-                            @RequestParam(name = "\"e-mail\"") String email,
-                            ModelAndView modelAndView) {
+                            @RequestParam(name = "email") String email,
+                            Model model) {
 
         try {
             ClientDAOImpl clientDAO = new ClientDAOImpl();
-            Long id = clientDAO.getAll(Client.class).stream()
-                    .map(Client::getId)
-                    .max(Long::compareTo).orElse(1L);
+            long id = clientDAO.getAll(Client.class).stream()
+                    .map(Client::getId).max(Long::compareTo).orElse(1L);
             Client client = new Client(id, fcn, type, address, email);
-//            Client client = new Client(fcn, type, address, email);
             clientDAO.create(client);
-            modelAndView.addObject("client", client);
-            return "client.html";
+            String res = String.format("Client added successfully with id = %d", id);
+            model.addAttribute("msg",
+                    res);
+            return "successful";
         } catch (Exception e) {
-            return "Can't create client.\n";
+            model.addAttribute("error",
+                    "Can't create client.");
+            return "error";
         }
 
     }
