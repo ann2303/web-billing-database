@@ -15,6 +15,11 @@
             <a id="client_root_page_button" href="/" class="btn btn-outline-warning" role="button">Root page</a>
         </div>
     </nav>
+    <script>
+        function get_href(id) {
+            return "http://localhost:8080/client_page?id=" + "${id}";
+        }
+    </script>
 </header>
 
 <br>
@@ -33,6 +38,14 @@
         <td colspan="8"> No clients :( </td>
     </tr>
     <tr th:each="client : ${clients}">
+        <td><script>
+            var a = document.createElement('a');
+            var linkText = document.createTextNode("Страница клиента");
+            a.appendChild(linkText);
+            a.title = "Страница клиента";
+            a.href = "`http://localhost:8080/client_page?id=${client.getId()}`";
+            document.body.appendChild(a);
+        </script></td>
         <td><span th:text="${client.getName()}"> </span></td>
         <td><span th:text="${client.getType()}"> </span></td>
         <td><span th:text="${client.getAddress()}"> </span></td>

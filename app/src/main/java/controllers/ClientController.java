@@ -51,4 +51,59 @@ public class ClientController {
 
     }
 
+    @RequestMapping(value = "/update_client", method = RequestMethod.GET)
+    public String updateClient(@RequestParam(name = "id", required = true) Long id,
+                            @RequestParam(name = "fcn", required = true) String fcn,
+                            @RequestParam(name = "type") String type,
+                            @RequestParam(name = "address") String address,
+                            @RequestParam(name = "email") String email,
+                            Model model) {
+
+        try {
+            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            Client client = new Client(id, fcn, type, address, email);
+            clientDAO.update(client);
+            String res = String.format("Client updated successfully with id = %d", id);
+            model.addAttribute("msg",
+                    res);
+            return "successful";
+        } catch (Exception e) {
+            model.addAttribute("error",
+                    "Can't update client.");
+            return "error";
+        }
+
+    }
+
+    @RequestMapping(value = "/client_page", method = RequestMethod.GET)
+    public String pageClient(@RequestParam(name = "id", required = true) Long id,
+                               Model model) {
+        ClientDAOImpl clientDAO = new ClientDAOImpl();
+        Client client = clientDAO.getEntityById(id, Client.class);
+        model.addAttribute("client",
+                client);
+        return "client_page";
+    }
+
+    @RequestMapping(value = "/delete_client", method = RequestMethod.GET)
+    public String deleteClient(@RequestParam(name = "id", required = true) Long id,
+                               Model model) {
+
+        try {
+            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            Client client = clientDAO.getEntityById(id, Client.class);
+            clientDAO.delete(client);
+            String res = String.format("Client deleted successfully with id = %d", id);
+            model.addAttribute("msg",
+                    res);
+            return "successful";
+        } catch (Exception e) {
+            model.addAttribute("error",
+                    "Can't delete client.");
+            return "error";
+        }
+
+    }
+
+
 }
