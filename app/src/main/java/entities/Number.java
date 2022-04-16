@@ -18,6 +18,22 @@ import java.time.Period;
 @Table(name = "number")
 public class Number {
 
+    public Long getId() {
+        return id;
+    }
+
+    public Client getOwner() {
+        return owner;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getMaxCredit() {
+        return maxCredit;
+    }
+
     @Id
     @Column(name = "number_id")
     private Long id;

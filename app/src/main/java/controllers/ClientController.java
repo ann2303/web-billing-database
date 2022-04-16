@@ -5,7 +5,6 @@ import entities.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import services.ClientService;
 
 import java.util.List;
@@ -18,15 +17,15 @@ public class ClientController {
         ClientService clientService = new ClientService();
         List<Client> all = clientService.getAll();
         model.addAttribute("clients", all);
-        return "client";
+        return "client/client";
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = "/client/registration", method = RequestMethod.GET)
     public String registration(Model model) {
-        return "registration";
+        return "client/registration";
     }
 
-    @RequestMapping(value = "/add_client", method = RequestMethod.GET)
+    @RequestMapping(value = "/client/add_client", method = RequestMethod.GET)
     public String addClient(@RequestParam(name = "fcn", required = true) String fcn,
                             @RequestParam(name = "type") String type,
                             @RequestParam(name = "address") String address,
@@ -82,7 +81,7 @@ public class ClientController {
         Client client = clientDAO.getEntityById(id, Client.class);
         model.addAttribute("client",
                 client);
-        return "client_page";
+        return "client/client_page";
     }
 
     @RequestMapping(value = "/delete_client", method = RequestMethod.GET)

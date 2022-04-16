@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service's page</title>
+</head>
+<body>
+<form>
+    <p>
+        <label for="id" class="id" data-icon="n">Service's name</label>
+        <input id="id" name="id" required="required" type="text" th:value="${service.getId()}" readonly/>
+    </p>
+    <p>
+        <label for="name" class="name" data-icon="n">Service's name</label>
+        <input id="name" name="name" required="required" type="text" th:value="${service.getName()}" />
+    </p>
+    <p>
+        <label for="pay_per_month" class="pay_per_month" data-icon="t" > Pay per month </label>
+        <input id="pay_per_month" name="pay_per_month" required="required" type="text" th:value="${service.getPayPerMounth()}"/>
+    </p>
+    <p>
+        <label for="pay_per_day" class="pay_per_day" data-icon="a"> Pay per day </label>
+        <input id="pay_per_day" name="pay_per_day" required="required" type="text" th:value="${service.getPayPerDay()}"/>
+    </p>
+    <p>
+        <label for="start_cost" class="start_cost" data-icon="e"> Start cost </label>
+        <input id="start_cost" name="start_cost" required="required" type="text" th:value="${service.getStartCost()}"/>
+    </p>
+    <p>
+        <label for="structure" class="structure" data-icon="e"> Structure </label>
+        <input id="structure" name="structure" required="required" type="text" th:value="${service.getStructure()}"/>
+    </p>
+    <p class="upd_button">
+        <input type="submit" value="Save changes" th:formaction="@{'/update_service'}" formmethod="get"/>
+    </p>
+    <p class="del_button">
+        <input type="submit" value="Delete client" formaction="@{'/delete_service'}" formmethod="get"/>
+    </p>
+</form>
+</body>
+</html>

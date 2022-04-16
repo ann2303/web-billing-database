@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div id="container_demo" >
+  <a class="hiddenanchor" id="tosubscribe"></a>
+  <a class="hiddenanchor" id="tologin"></a>
+  <div id="wrapper">
+    <div id="subscribe" class="animate form">
+      <form action="#" th:action="${'/add_number'}" method="get">
+        <h1> Sign up </h1>
+        <p>
+          <label for="client_id" class="client_id" data-icon="n">Client's id</label>
+          <input id="client_id" name="client_id" required="required" type="text" th:value="${client_id}" readonly/>
+        </p>
+        <p>
+          <label for="number" class="number" data-icon="t" > Number </label>
+          <input id="number" name="number" required="required" type="text"/>
+        </p>
+        <p>
+          <label for="balance" class="balance" data-icon="a"> Balance </label>
+          <input id="balance" name="balance" required="required" type="text"/>
+        </p>
+        <p>
+          <label for="max_credit" class="max_credit" data-icon="e"> Max credit </label>
+          <input id="max_credit" name="max_credit" required="required" type="text"/>
+        </p>
+        <p class="button">
+          <input type="submit" value="Sign up"/>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+</html>
