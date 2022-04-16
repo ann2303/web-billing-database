@@ -17,7 +17,7 @@
     </nav>
     <script>
         function get_href(id) {
-            return "http://localhost:8080/client_page?id=" + "${id}";
+            return "http://localhost:8080/client_page?id=" + <p> th:text="${id}"</p>;
         }
     </script>
 </header>
@@ -38,14 +38,7 @@
         <td colspan="8"> No clients :( </td>
     </tr>
     <tr th:each="client : ${clients}">
-        <td><script>
-            var a = document.createElement('a');
-            var linkText = document.createTextNode("Страница клиента");
-            a.appendChild(linkText);
-            a.title = "Страница клиента";
-            a.href = "`http://localhost:8080/client_page?id=${client.getId()}`";
-            document.body.appendChild(a);
-        </script></td>
+        <td><div><a th:href="@{'http://localhost:8080/client_page?id=' + ${client.getId()}}">Client's page</a></div></td>
         <td><span th:text="${client.getName()}"> </span></td>
         <td><span th:text="${client.getType()}"> </span></td>
         <td><span th:text="${client.getAddress()}"> </span></td>
