@@ -23,7 +23,9 @@ public class NumberController {
     }
 
     @RequestMapping(value = "/number/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
+    public String registration(@RequestParam(name = "id") Long client_id,
+            Model model) {
+        model.addAttribute("client_id", client_id);
         return "number/registration";
     }
 

@@ -32,6 +32,9 @@
     <p class="del_button">
         <input type="submit" value="Delete client" formaction="@{'/delete_client'}" formmethod="get"/>
     </p>
+    <p class="num_button">
+        <input type="submit" value="Add number" formaction="${'/number/registration?id=' + client.getId()}" formmethod="get"/>
+    </p>
 </form>
 </body>
 </html>

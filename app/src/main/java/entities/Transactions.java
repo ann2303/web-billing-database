@@ -43,6 +43,14 @@ public class Transactions {
     @Column(name = "number")
     Long number;
 
+    public Long getId() {
+        return id;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
     @Column(name = "transaction_time")
     private Timestamp time;
 
