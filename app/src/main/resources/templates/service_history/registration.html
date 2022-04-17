@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div id="container_demo" >
+  <a class="hiddenanchor" id="tosubscribe"></a>
+  <a class="hiddenanchor" id="tologin"></a>
+  <div id="wrapper">
+    <div id="subscribe" class="animate form">
+      <form action="#" th:action="${'/add_service_history'}" method="get">
+        <h1> Sign up </h1>
+        <p>
+          <label for="number" class="number" data-icon="t" > Number </label>
+          <input id="number" name="number" required="required" type="text" th:value="${number}"/>
+        </p>
+        <p>
+          <label for="type" class="type" data-icon="a"> Id услуги </label>
+          <input id="type" name="type" required="required" type="text" th:value="${service_id}"/>
+        </p>
+        <p>
+          <label for="start_time" class="start_time" data-icon="a"> Connection time </label>
+          <input id="start_time" name="start_time" required="required" type="datetime-local"/>
+        </p>
+        <p>
+          <label for="end_time" class="end_time" data-icon="a"> Disconnection time </label>
+          <input id="end_time" name="end_time" required="required" type="datetime-local"/>
+        </p>
+        <p class="button">
+          <input type="submit" value="Sign up"/>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+</html>

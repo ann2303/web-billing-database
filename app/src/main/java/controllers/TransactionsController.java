@@ -27,7 +27,7 @@ public class TransactionsController {
         return "transactions/registration";
     }
 
-    @RequestMapping(value = "/transactions/add_transactions", method = RequestMethod.GET)
+    @RequestMapping(value = "/add_transactions", method = RequestMethod.GET)
     public String addTransactions(@RequestParam(name = "number", required = true) Long number,
                             @RequestParam(name = "type") String type,
                             @RequestParam(name = "time") Timestamp time,

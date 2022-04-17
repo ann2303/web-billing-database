@@ -9,6 +9,26 @@ import java.sql.Time;
 @Entity
 @Table(name = "service_history")
 public class ServiceHistory {
+    public Long getId() {
+        return id;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public Number getNumber() {
+        return number;
+    }
+
+    public Time getStartTime() {
+        return startTime;
+    }
+
+    public Time getEndTime() {
+        return endTime;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
