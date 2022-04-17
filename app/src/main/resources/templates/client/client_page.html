@@ -7,7 +7,7 @@
 <body>
 <form>
     <p>
-        <label for="id" class="id" data-icon="n">Client's name</label>
+        <label for="id" class="id" data-icon="n">Client's id</label>
         <input id="id" name="id" required="required" type="text" th:value="${client.getId()}" readonly/>
     </p>
     <p>
@@ -30,11 +30,10 @@
         <input type="submit" value="Save changes" th:formaction="@{'/update_client'}" formmethod="get"/>
     </p>
     <p class="del_button">
-        <input type="submit" value="Delete client" formaction="@{'/delete_client'}" formmethod="get"/>
+        <input type="submit" value="Delete client" th:formaction="@{'/delete_client'}" formmethod="get"/>
     </p>
-    <p class="num_button">
-        <input type="submit" value="Add number" formaction="${'/number/registration?id=' + client.getId()}" formmethod="get"/>
-    </p>
+
 </form>
+<div><a th:href="@{/number/registration(id=${client.getId()})}"><button id="num_button">Add number</button></a></div>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number's page</title>
+</head>
+<body>
+<form>
+    <p>
+        <label for="number_id" class="number_id" data-icon="n">Number</label>
+        <input id="number_id" name="number_id" required="required" type="text" th:value="${number.getId()}" readonly/>
+    </p>
+    <p>
+        <label for="client_id" class="client_id" data-icon="n">Client's id</label>
+        <input id="client_id" name="client_id" required="required" type="text" th:value="${number.getOwner().getId()}" />
+    </p>
+    <p>
+        <label for="max_credit" class="max_credit" data-icon="e">Max credit</label>
+        <input id="max_credit" name="max_credit" required="required" type="text" th:value="${number.getMaxCredit()}"/>
+    </p>
+    <p>
+        <label for="balance" class="balance" data-icon="e">Balance</label>
+        <input id="balance" name="balance" required="required" type="text" th:value="${number.getBalance()}" readonly/>
+    </p>
+    <p class="upd_button">
+        <input type="submit" value="Save changes" th:formaction="@{'/update_number'}" formmethod="get"/>
+    </p>
+    <p class="del_button">
+        <input type="submit" value="Delete number" th:formaction="@{'/delete_number'}" formmethod="get"/>
+    </p>
+
+</form>
+<div><a th:href="@{/service_history/registration(number=${number.getId()})}"><button id="num_button">Add service agreement</button></a></div>
+<div><a th:href="@{/transactions/registration(number=${number.getId()})}"><button id="tr_button">Add transaction</button></a></div>
+</body>
+</html>

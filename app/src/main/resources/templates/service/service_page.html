@@ -34,8 +34,9 @@
         <input type="submit" value="Save changes" th:formaction="@{'/update_service'}" formmethod="get"/>
     </p>
     <p class="del_button">
-        <input type="submit" value="Delete client" formaction="@{'/delete_service'}" formmethod="get"/>
+        <input type="submit" value="Delete service" th:formaction="@{'/delete_service'}" formmethod="get"/>
     </p>
 </form>
+<div><a th:href="@{/service_history/registration(service_id=${service.getId()})}"><button id="num_button">Add service agreement</button></a></div>
 </body>
 </html>
