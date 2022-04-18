@@ -24,8 +24,8 @@ public class Number {
         return id;
     }
 
-    public Client getOwner() {
-        return owner;
+    public Long getOwner() {
+        return client_id;
     }
 
     public double getBalance() {
@@ -40,10 +40,10 @@ public class Number {
     @Column(name = "number_id")
     private Long id;
 
-    @ManyToOne(targetEntity = Client.class)
+    @JoinTable(name = "clients")
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @FilterJoinTable(name = "nameFilter", condition = "fcn like :nameParam")
-    private Client owner;
+    private Long client_id;
 
     @Column(name = "balance")
     private double balance;
@@ -53,8 +53,7 @@ public class Number {
 
     public Number(Long id, Long clientId, double balance, double maxCredit) {
         this.id = id;
-        ClientDAO clientDAO = new ClientDAO();
-        this.owner = clientDAO.getEntityById(clientId, Client.class);
+        this.client_id = clientId;
         this.balance = balance;
         this.maxCredit = maxCredit;
     }

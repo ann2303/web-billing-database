@@ -34,7 +34,7 @@
     </tr>
     <tr th:each="number : ${numbers}">
         <td><span th:text="${number.getId()}"> </span></td>
-        <td><div><a th:href="@{'http://localhost:8080/client_page?id=' + ${number.getOwner().getId()}}">"${number.getOwner().getName()}}"</a></div></td>
+        <td><div><a th:href="@{'http://localhost:8080/client_page?id=' + ${number.getOwner()}}">Ссылка владельца</a></div></td>
         <td><span th:text="${number.getBalance()}"> </span></td>
         <td><span th:text="${number.getMaxCredit()}"> </span></td>
     </tr>

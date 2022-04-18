@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Биллинговая база оператора связи</title>
+</head>
+<body>
+<ul class="ddropdownn">
+  <li class="ddropdownn-top">
+    <a class="ddropdownn-top" href="/clients">Клиенты</a>
+    <ul class="ddropdownn-inside">
+      <li><a href="/client/registration">Регистрация клиента</a></li>
+    </ul>
+  </li>
+  <li class="ddropdownn-top">
+    <a class="ddropdownn-top" href="/services">Услуги</a>
+    <ul class="ddropdownn-inside">
+      <li><a href="/service/registration">Регистрация услуги</a></li>
+    </ul>
+  </li>
+  <li class="ddropdownn-top">
+    <a class="ddropdownn-top" href="/numbers">Номера</a>
+  </li>
+  <li class="ddropdownn-top">
+    <a class="ddropdownn-top" href="/service_history">Журнал услуг</a>
+  </li>
+  <li class="ddropdownn-top">
+    <a class="ddropdownn-top" href="/transactions">История операций</a>
+    <ul class="ddropdownn-inside">
+      <li><a href="/transactions/registration">Добавление транзакции</a></li>
+    </ul>
+  </li>
+</ul>
+<form action="/filter_services" method="get">
+  <p>
+    <label for="name_filter" class="name_filter" data-icon="n">Name filter</label>
+    <input id="name_filter" name="name_filter" type="text"/>
+  </p>
+  <p><select name="sort" multiple>
+    <option>По возрастанию</option>
+    <option>По убыванию</option>
+  </select></p>
+  <p><input type="submit" value="Send"></p>
+</form>
+
+<table class="table table-bordered " style="width: auto; background-color: rgba(43,5,22,.1)">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col"> Страница услуги </th>
+    <th scope="col"> Наименование </th>
+    <th scope="col"> Абонентская плата (в месяц) </th>
+    <th scope="col"> Абонентская плата (в день) </th>
+    <th scope="col"> Стоимость подключения </th>
+    <th scope="col"> Состав </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${#lists.isEmpty(services)}">
+    <td colspan="8"> No services :( </td>
+  </tr>
+  <tr th:each="service : ${services}">
+    <td><div><a th:href="@{'http://localhost:8080/service_page?id=' + ${service.getId()}}">Service's page</a></div></td>
+    <td><span th:text="${service.getName()}"> </span></td>
+    <td><span th:text="${service.getPayPerMounth()}"> </span></td>
+    <td><span th:text="${service.getPayPerDay()}"> </span></td>
+    <td><span th:text="${service.getStartCost()}"> </span></td>
+    <td><span th:text="${service.getStructure()}"> </span></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

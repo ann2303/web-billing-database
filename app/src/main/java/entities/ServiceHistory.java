@@ -13,11 +13,11 @@ public class ServiceHistory {
         return id;
     }
 
-    public Service getService() {
-        return service;
+    public Long getService() {
+        return service_id;
     }
 
-    public Number getNumber() {
+    public Long getNumber() {
         return number;
     }
 
@@ -34,13 +34,13 @@ public class ServiceHistory {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(targetEntity = Service.class)
+    @JoinTable(name = "services")
     @JoinColumn(name = "service_id", referencedColumnName = "id")
-    private Service service;
+    private Long service_id;
 
-    @ManyToOne(targetEntity = Number.class)
+    @JoinTable(name = "numbers")
     @JoinColumn(name = "number", referencedColumnName = "number_id")
-    private Number number;
+    private Long number;
 
     @Column(name = "connection_time")
     private Time startTime;
@@ -48,13 +48,11 @@ public class ServiceHistory {
     @Column(name = "disconnection_time")
     private Time endTime;
 
-    public ServiceHistory(Long id, Long service_id, Long number_id, Time startTime, Time endTime) {
+    public ServiceHistory(Long id, Long service_id, Long number, Time startTime, Time endTime) {
 
         this.id = id;
-        ServiceDAO serviceDAO = new ServiceDAO();
-        this.service = serviceDAO.getEntityById(service_id, Service.class);
-        NumberDAO numberDAO = new NumberDAO();
-        this.number = numberDAO.getEntityById(number_id, Number.class);
+        this.service_id = service_id;
+        this.number = number;
         this.startTime = startTime;
         this.endTime = endTime;
 

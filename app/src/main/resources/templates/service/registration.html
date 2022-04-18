@@ -5,23 +5,27 @@
   <a class="hiddenanchor" id="tologin"></a>
   <div id="wrapper">
     <div id="subscribe" class="animate form">
-      <form action="#" th:action="${'/add_client'}" method="get">
+      <form action="#" th:action="${'/add_service'}" method="get">
         <h1> Sign up </h1>
         <p>
-          <label for="fcn" class="fcn" data-icon="n">Client's name</label>
-          <input id="fcn" name="fcn" required="required" type="text" placeholder="Каретин Виталий Степанович" />
+          <label for="fcn" class="fcn" data-icon="n">Service's name</label>
+          <input id="fcn" name="fcn" required="required" type="text" placeholder="SMS" />
         </p>
         <p>
-          <label for="type" class="type" data-icon="t" > Type </label>
-          <input id="type" name="type" required="required" type="text" placeholder="юр.\физ."/>
+          <label for="type1" class="type" data-icon="t" > Pay per mounth </label>
+          <input id="type1" name="type" required="required" type="number" placeholder="100"/>
         </p>
         <p>
-          <label for="address" class="address" data-icon="a"> Address </label>
-          <input id="address" name="address" required="required" type="text" placeholder="г. Москва, ул. Таганская, д. 15"/>
+          <label for="type2" class="type" data-icon="t" > Pay per day </label>
+          <input id="type2" name="type" required="required" type="number" placeholder="100"/>
         </p>
         <p>
-          <label for="email" class="youmail" data-icon="e"> E-mail </label>
-          <input id="email" name="email" required="required" type="text" placeholder="mysupermail@mail.com"/>
+          <label for="type3" class="type" data-icon="t" > Start cost </label>
+          <input id="type3" name="type" required="required" type="number" placeholder="100"/>
+        </p>
+        <p>
+          <label for="email" class="text" data-icon="e"> Structure </label>
+          <input id="email" name="email" required="required" type="text" placeholder="8 Гб"/>
         </p>
         <p class="button">
           <input type="submit" value="Sign up"/>

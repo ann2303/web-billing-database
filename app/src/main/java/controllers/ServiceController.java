@@ -2,6 +2,8 @@ package controllers;
 
 import DAO.ServiceDAO;
 import DAO.ServiceDAO;
+import DAO.ServiceDAO;
+import entities.Service;
 import entities.Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 public class ServiceController {
@@ -18,6 +23,31 @@ public class ServiceController {
         ServiceDAO serviceDAO = new ServiceDAO();
         List<Service> all = serviceDAO.getAll(Service.class);
         model.addAttribute("services", all);
+        return "service/service";
+    }
+
+    @RequestMapping(value = "/filter_services", method = RequestMethod.GET)
+    public String filterSortServices(@RequestParam(name = "name_filter") String name_filter,
+                                    @RequestParam(name = "sort") String sort,
+                                    Model model) {
+        ServiceDAO serviceDAO = new ServiceDAO();
+        List<Service> result;
+        if (Objects.nonNull(name_filter)) {
+            result = serviceDAO.getAll(Service.class).stream()
+                    .filter(service -> service.getName().contains(name_filter))
+                    .collect(Collectors.toList());
+        } else {
+            result = serviceDAO.getAll(Service.class);
+        }
+        if (Objects.nonNull(sort)) {
+            if (sort.equals("По возрастанию")) {
+                result.sort(Comparator.comparing(Service::getName));
+            } else if (sort.equals("По убыванию")) {
+                result.sort((Service o1, Service o2) ->
+                        o2.getName().compareTo(o1.getName()));
+            }
+        }
+        model.addAttribute("services", result);
         return "service/service";
     }
 

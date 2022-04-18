@@ -35,8 +35,8 @@
     </tr>
     <tr th:each="sh : ${service_history}">
         <td><span th:text="${sh.getId()}"> </span></td>
-        <td><div><a th:href="@{'http://localhost:8080/service_page?id=' + ${sh.getService().getId()}}">Service's page</a></div></td>
-        <td><span th:text="${sh.getNumber().getId()}"> </span></td>
+        <td><div><a th:href="@{'http://localhost:8080/service_page?id=' + ${sh.getService()}}">Service's page</a></div></td>
+        <td><span th:text="${sh.getId()}"> </span></td>
         <td><span th:text="${sh.getStartTime()}"> </span></td>
         <td><span th:text="${sh.getEndTime()}"> </span></td>
     </tr>

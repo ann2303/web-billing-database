@@ -50,7 +50,7 @@ public class ClientController {
         return "client/registration";
     }
 
-    @RequestMapping(value = "/client/add_client", method = RequestMethod.GET)
+    @RequestMapping(value = "/add_client", method = RequestMethod.GET)
     public String addClient(@RequestParam(name = "fcn", required = true) String fcn,
                             @RequestParam(name = "type") String type,
                             @RequestParam(name = "address") String address,
