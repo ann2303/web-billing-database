@@ -18,6 +18,17 @@
 </header>
 
 <br>
+<form action="/filter_clients" method="get">
+    <p>
+        <label for="name_filter" class="name_filter" data-icon="n">Name filter</label>
+        <input id="name_filter" name="name_filter" type="text"/>
+    </p>
+    <p><select name="sort" multiple>
+        <option>По возрастанию</option>
+        <option>По убыванию</option>
+    </select></p>
+    <p><input type="submit" value="Send"></p>
+</form>
 
 <table class="table table-bordered " style="width: auto; background-color: rgba(43,5,22,.1)">
     <thead class="thead-dark">

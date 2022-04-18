@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NumberDAOTest {
 
-    NumberDAOImpl numberDAOImpl = new NumberDAOImpl();
+    NumberDAO numberDAO = new NumberDAO();
 
     @Test
     void deleteTest() {
-        Number entity = numberDAOImpl.getEntityById(89375555269L, Number.class);
-        numberDAOImpl.delete(entity);
-        assertNull(numberDAOImpl.getEntityById(89375555269L, Number.class));
+        Number entity = numberDAO.getEntityById(89375555269L, Number.class);
+        numberDAO.delete(entity);
+        assertNull(numberDAO.getEntityById(89375555269L, Number.class));
     }
 }

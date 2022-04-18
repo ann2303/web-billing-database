@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionsDAOTest {
 
-    TransactionsDAOImpl transactionsDAOImpl = new TransactionsDAOImpl();
+    TransactionsDAO transactionsDAO = new TransactionsDAO();
 
     @Test
     void getReportTest() {
@@ -21,7 +21,7 @@ class TransactionsDAOTest {
         start.toLocalDateTime();
         end.toLocalDateTime();
 
-        List<Map<Timestamp, Map<Double, String>>> report = transactionsDAOImpl
+        List<Map<Timestamp, Map<Double, String>>> report = transactionsDAO
                 .getReport(89373233449L,
                         start,
                         end);

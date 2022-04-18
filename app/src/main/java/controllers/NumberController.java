@@ -1,7 +1,7 @@
 package controllers;
 
 import DAO.NumberDAO;
-import DAO.NumberDAOImpl;
+import DAO.NumberDAO;
 import entities.Number;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ public class NumberController {
 
     @RequestMapping(value = "/numbers", method = RequestMethod.GET)
     public String getNumbers(Model model) {
-        NumberDAO numberService = new NumberDAOImpl();
+        NumberDAO numberService = new NumberDAO();
         List<Number> all = numberService.getAll(Number.class);
         model.addAttribute("numbers", all);
         return "number/number";
@@ -37,7 +37,7 @@ public class NumberController {
                             Model model) {
 
         try {
-            NumberDAOImpl numberDAO = new NumberDAOImpl();
+            NumberDAO numberDAO = new NumberDAO();
             Number number = new Number(number_id, client_id, balance, max_credit);
             numberDAO.create(number);
             String res = String.format("Number added successfully with id = %d", number_id);
@@ -60,7 +60,7 @@ public class NumberController {
                                Model model) {
 
         try {
-            NumberDAOImpl numberDAO = new NumberDAOImpl();
+            NumberDAO numberDAO = new NumberDAO();
             Number number = new Number(number_id, client_id, balance, max_credit);
             numberDAO.update(number);
             String res = String.format("Number updated successfully with id = %d", number_id);
@@ -81,7 +81,7 @@ public class NumberController {
                                Model model) {
 
         try {
-            NumberDAOImpl numberDAO = new NumberDAOImpl();
+            NumberDAO numberDAO = new NumberDAO();
             Number number = numberDAO.getEntityById(id, Number.class);
             numberDAO.delete(number);
             String res = String.format("Number deleted successfully with id = %d", id);

@@ -1,6 +1,6 @@
 package controllers;
 
-import DAO.ServiceHistoryDAOImpl;
+import DAO.ServiceHistoryDAO;
 import entities.ServiceHistory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ public class ServiceHistoryController {
 
     @RequestMapping(value = "/service_history", method = RequestMethod.GET)
     public String getServiceHistory(Model model) {
-        ServiceHistoryDAOImpl service_historyDAO = new ServiceHistoryDAOImpl();
+        ServiceHistoryDAO service_historyDAO = new ServiceHistoryDAO();
         List<ServiceHistory> all = service_historyDAO.getAll(ServiceHistory.class);
         model.addAttribute("service_history", all);
         return "service_history/service_history";
@@ -41,7 +41,7 @@ public class ServiceHistoryController {
                             Model model) {
 
         try {
-            ServiceHistoryDAOImpl service_historyDAO = new ServiceHistoryDAOImpl();
+            ServiceHistoryDAO service_historyDAO = new ServiceHistoryDAO();
             long id = service_historyDAO.getAll(ServiceHistory.class).stream()
                     .map(ServiceHistory::getId).max(Long::compareTo).orElse(1L);
             ServiceHistory service_history = new ServiceHistory(id, number, service_id, start_time, end_time);
@@ -63,7 +63,7 @@ public class ServiceHistoryController {
                                Model model) {
 
         try {
-            ServiceHistoryDAOImpl service_historyDAO = new ServiceHistoryDAOImpl();
+            ServiceHistoryDAO service_historyDAO = new ServiceHistoryDAO();
             ServiceHistory service_history = service_historyDAO.getEntityById(id, ServiceHistory.class);
             service_historyDAO.delete(service_history);
             String res = String.format("ServiceHistory deleted successfully with id = %d", id);

@@ -2,5 +2,5 @@ package DAO;
 
 import entities.Service;
 
-public interface ServiceDAO extends DAO<Service, Long> {
+public class ServiceDAO implements DAO<Service, Long> {
 }

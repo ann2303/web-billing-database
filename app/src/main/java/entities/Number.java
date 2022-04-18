@@ -1,5 +1,7 @@
 package entities;
 
+import DAO.ClientDAO;
+import DAO.ClientDAO;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -51,7 +53,8 @@ public class Number {
 
     public Number(Long id, Long clientId, double balance, double maxCredit) {
         this.id = id;
-        this.owner.setId(clientId);
+        ClientDAO clientDAO = new ClientDAO();
+        this.owner = clientDAO.getEntityById(clientId, Client.class);
         this.balance = balance;
         this.maxCredit = maxCredit;
     }

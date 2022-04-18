@@ -1,7 +1,7 @@
 package controllers;
 
 import DAO.ServiceDAO;
-import DAO.ServiceDAOImpl;
+import DAO.ServiceDAO;
 import entities.Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +15,7 @@ import java.util.List;
 public class ServiceController {
     @RequestMapping(value = "/services", method = RequestMethod.GET)
     public String getservices(Model model) {
-        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        ServiceDAO serviceDAO = new ServiceDAO();
         List<Service> all = serviceDAO.getAll(Service.class);
         model.addAttribute("services", all);
         return "service/service";
@@ -35,7 +35,7 @@ public class ServiceController {
                              Model model) {
 
         try {
-            ServiceDAO serviceDAO = new ServiceDAOImpl();
+            ServiceDAO serviceDAO = new ServiceDAO();
             long id = serviceDAO.getAll(Service.class).stream()
                     .map(Service::getId).max(Long::compareTo).orElse(1L);
             Service service = new Service(id, name, payPerMounth, payPerDay, startCost, structure);
@@ -62,7 +62,7 @@ public class ServiceController {
                                 Model model) {
 
         try {
-            ServiceDAO serviceDAO = new ServiceDAOImpl();
+            ServiceDAO serviceDAO = new ServiceDAO();
             Service service = new Service(id, name, payPerMounth, payPerDay, startCost, structure);
             serviceDAO.update(service);
             String res = String.format("service updated successfully with id = %d", id);
@@ -80,7 +80,7 @@ public class ServiceController {
     @RequestMapping(value = "/service_page", method = RequestMethod.GET)
     public String pageService(@RequestParam(name = "id", required = true) Long id,
                              Model model) {
-        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        ServiceDAO serviceDAO = new ServiceDAO();
         Service service = serviceDAO.getEntityById(id, Service.class);
         model.addAttribute("service",
                 service);
@@ -92,7 +92,7 @@ public class ServiceController {
                                Model model) {
 
         try {
-            ServiceDAO serviceDAO = new ServiceDAOImpl();
+            ServiceDAO serviceDAO = new ServiceDAO();
             Service service = serviceDAO.getEntityById(id, Service.class);
             serviceDAO.delete(service);
             String res = String.format("service deleted successfully with id = %d", id);

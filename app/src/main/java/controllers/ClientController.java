@@ -1,22 +1,47 @@
 package controllers;
 
-import DAO.ClientDAOImpl;
+import DAO.ClientDAO;
 import entities.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import services.ClientService;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ClientController {
 
     @RequestMapping(value = "/clients", method = RequestMethod.GET)
     public String getClients(Model model) {
-        ClientService clientService = new ClientService();
-        List<Client> all = clientService.getAll();
+        ClientDAO clientDAO = new ClientDAO();
+        List<Client> all = clientDAO.getAll(Client.class);
         model.addAttribute("clients", all);
+        return "client/client";
+    }
+
+    @RequestMapping(value = "/filter_clients", method = RequestMethod.GET)
+    public String filterSortClients(@RequestParam(name = "name_filter") String name_filter,
+                                    @RequestParam(name = "sort") String sort,
+                                    Model model) {
+        ClientDAO clientDAO = new ClientDAO();
+        List<Client> result;
+        if (Objects.nonNull(name_filter)) {
+            result = clientDAO.getAll(Client.class).stream()
+                    .filter(client -> client.getName().contains(name_filter))
+                    .collect(Collectors.toList());
+        } else {
+            result = clientDAO.getAll(Client.class);
+        }
+        if (Objects.nonNull(sort)) {
+            if (sort.equals("По возрастанию")) {
+                result.sort(Comparator.comparing(Client::getName));
+            } else if (sort.equals("По убыванию")) {
+                result.sort((Client o1, Client o2) ->
+                        o2.getName().compareTo(o1.getName()));
+            }
+        }
+        model.addAttribute("clients", result);
         return "client/client";
     }
 
@@ -33,7 +58,7 @@ public class ClientController {
                             Model model) {
 
         try {
-            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            ClientDAO clientDAO = new ClientDAO();
             long id = clientDAO.getAll(Client.class).stream()
                     .map(Client::getId).max(Long::compareTo).orElse(1L);
             Client client = new Client(id, fcn, type, address, email);
@@ -59,7 +84,7 @@ public class ClientController {
                             Model model) {
 
         try {
-            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            ClientDAO clientDAO = new ClientDAO();
             Client client = new Client(id, fcn, type, address, email);
             clientDAO.update(client);
             String res = String.format("Client updated successfully with id = %d", id);
@@ -77,7 +102,7 @@ public class ClientController {
     @RequestMapping(value = "/client_page", method = RequestMethod.GET)
     public String pageClient(@RequestParam(name = "id", required = true) Long id,
                                Model model) {
-        ClientDAOImpl clientDAO = new ClientDAOImpl();
+        ClientDAO clientDAO = new ClientDAO();
         Client client = clientDAO.getEntityById(id, Client.class);
         model.addAttribute("client",
                 client);
@@ -89,7 +114,7 @@ public class ClientController {
                                Model model) {
 
         try {
-            ClientDAOImpl clientDAO = new ClientDAOImpl();
+            ClientDAO clientDAO = new ClientDAO();
             Client client = clientDAO.getEntityById(id, Client.class);
             clientDAO.delete(client);
             String res = String.format("Client deleted successfully with id = %d", id);
