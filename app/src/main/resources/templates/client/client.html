@@ -1,36 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Clients</title>
+    <meta charset="UTF-8">
+    <title>Клиенты</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+    <div style="background-image: url('https://cdn.blocktoro.com/wp-content/uploads/2019/10/Lucifer-Season-5-Release-Date-1.jpg');"></div>
+    <style>
+        .mb-3 {
+            margin-right: 40%; /* Отступ справа */
+        }
+        body {
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 
-<body>
-<br>
+<body background="https://catherineasquithgallery.com/uploads/posts/2021-02/1614324609_43-p-raznotsvetnie-kubiki-fon-55.jpg">
+<div class="btn-group">
+    <button id="btn" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="background: -webkit-linear-gradient(-45deg, #f2f2f2 0%,#dddddd 50%,#ffffff 51%,#ffffff 71%,#f6f8fb 100%);">
+        Меню
+    </button>
+    <div id="menu" class="dropdown-menu">
+        <a class="dropdown-item" href="/clients">Клиенты</a>
+        <a class="dropdown-item" href="/client/registration">Регистрация клиента</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/services">Услуги</a>
+        <a class="dropdown-item" href="/service/registration">Регистрация услуги</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/numbers">Номера</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/service_history">Журнал услуг</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/transactions">История операций</a>
+        <a class="dropdown-item" href="/transactions/registration">Добавление транзакции</a>
+    </div>
+</div>
 
-<header class="sticky">
-    <nav class="navbar sticky-top navbar-dark bg-dark">
-        <div class="btn-group" role="group" aria-label="top buttons">
-            <a id="client_root_page_button" href="/" class="btn btn-outline-warning" role="button">Root page</a>
-        </div>
-    </nav>
-</header>
+<br>
+<br>
 
 <br>
 <form action="/filter_clients" method="get">
-    <p>
-        <label for="name_filter" class="name_filter" data-icon="n">Name filter</label>
-        <input id="name_filter" name="name_filter" type="text"/>
-    </p>
-    <p><select name="sort" multiple>
-        <option>По возрастанию</option>
-        <option>По убыванию</option>
-    </select></p>
-    <p><input type="submit" value="Send"></p>
+    <br>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label" style="font-palette: light; color: azure;">Сортировка</label>
+        <select class="form-select" aria-label="Default select example" name="sort">
+            <option value="По возрастанию">По возрастанию</option>
+            <option value="По убыванию">По убыванию</option>
+        </select>
+    </div>
+    <br>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label" style="font-palette: light; color: azure;">Фильтр по имени</label>
+        <input type="text" class="form-control" name="name_filter" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <button type="submit" class="btn btn-light">Найти</button>
 </form>
+<br>
+<br>
 
-<table class="table table-bordered " style="width: auto; background-color: rgba(43,5,22,.1)">
+<table class="table table-bordered" style="width: auto; background-color: azure; box-shadow: 0px 0px 7px 7px deepskyblue">
     <thead class="thead-dark">
     <tr>
         <th scope="col"> Name </th>
@@ -44,8 +84,7 @@
         <td colspan="8"> No clients :( </td>
     </tr>
     <tr th:each="client : ${clients}">
-        <td><div><a th:href="@{'http://localhost:8080/client_page?id=' + ${client.getId()}}">Client's page</a></div></td>
-        <td><span th:text="${client.getName()}"> </span></td>
+        <td><div><a th:href="@{'http://localhost:8080/client_page?id=' + ${client.getId()}}"><span th:text="${client.getName()}"> </span></a></div></td>
         <td><span th:text="${client.getType()}"> </span></td>
         <td><span th:text="${client.getAddress()}"> </span></td>
         <td><span th:text="${client.getEmail()}"> </span></td>

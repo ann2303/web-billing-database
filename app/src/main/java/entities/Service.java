@@ -42,7 +42,10 @@ public class Service {
         this.payPerMounth = payPerMounth;
         this.payPerDay = payPerDay;
         this.startCost = startCost;
-        this.structure = structure;
+        this.structure = structure.replaceAll("\"", "")
+                .replaceAll("\":", " :")
+                .replaceAll("\\{", "")
+                .replaceAll("}", "");
     }
 
     @Override

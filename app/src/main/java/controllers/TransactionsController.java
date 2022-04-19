@@ -19,7 +19,7 @@ public class TransactionsController {
         TransactionsDAO transactionsDAO = new TransactionsDAO();
         List<Transactions> all = transactionsDAO.getAll(Transactions.class);
         model.addAttribute("transactions", all);
-        return "transactions/transactions";
+        return "transactions/transaction";
     }
 
     @RequestMapping(value = "/transactions/registration", method = RequestMethod.GET)
