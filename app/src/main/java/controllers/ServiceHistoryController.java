@@ -25,8 +25,8 @@ public class ServiceHistoryController {
     }
 
     @RequestMapping(value = "/service_history/registration", method = RequestMethod.GET)
-    public String registration(@RequestParam(name = "number", required = true) Long number,
-                               @RequestParam(name = "service_id") Long service_id,
+    public String registration(@RequestParam(name = "number", required = false) Long number,
+                               @RequestParam(name = "service_id", required = false) Long service_id,
                                Model model) {
         model.addAttribute("number", number);
         model.addAttribute("service_id", service_id);

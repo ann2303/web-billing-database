@@ -58,7 +58,7 @@ public class ServiceController {
 
     @RequestMapping(value = "/add_service", method = RequestMethod.GET)
     public String addService(@RequestParam(name = "name", required = true) String name,
-                             @RequestParam(name = "pay_per_mounth") double payPerMounth,
+                             @RequestParam(name = "pay_per_month") double payPerMonth,
                              @RequestParam(name = "pay_per_day") double payPerDay,
                              @RequestParam(name = "start_cost") double startCost,
                              @RequestParam(name = "structure") String structure,
@@ -68,7 +68,7 @@ public class ServiceController {
             ServiceDAO serviceDAO = new ServiceDAO();
             long id = serviceDAO.getAll(Service.class).stream()
                     .map(Service::getId).max(Long::compareTo).orElse(1L);
-            Service service = new Service(id, name, payPerMounth, payPerDay, startCost, structure);
+            Service service = new Service(id, name, payPerMonth, payPerDay, startCost, structure);
             serviceDAO.create(service);
             String res = String.format("service added successfully with id = %d", id);
             model.addAttribute("msg",
@@ -85,7 +85,7 @@ public class ServiceController {
     @RequestMapping(value = "/update_service", method = RequestMethod.GET)
     public String updateService(@RequestParam(name = "id", required = true) Long id,
                                 @RequestParam(name = "name", required = true) String name,
-                                @RequestParam(name = "pay_per_mounth") double payPerMounth,
+                                @RequestParam(name = "pay_per_month") double payPerMonth,
                                 @RequestParam(name = "pay_per_day") double payPerDay,
                                 @RequestParam(name = "start_cost") double startCost,
                                 @RequestParam(name = "structure") String structure,
@@ -93,7 +93,7 @@ public class ServiceController {
 
         try {
             ServiceDAO serviceDAO = new ServiceDAO();
-            Service service = new Service(id, name, payPerMounth, payPerDay, startCost, structure);
+            Service service = new Service(id, name, payPerMonth, payPerDay, startCost, structure);
             serviceDAO.update(service);
             String res = String.format("service updated successfully with id = %d", id);
             model.addAttribute("msg",

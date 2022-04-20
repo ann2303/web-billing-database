@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/index.css">
@@ -24,6 +24,7 @@
   </style>
 </head>
 <div class="four"><h1>Регистрация транзакции</h1></div>
+<body background="https://catherineasquithgallery.com/uploads/posts/2021-02/1612763432_2-p-fon-goluboi-dim-2.jpg">
 <div class="btn-group">
   <button id="btn" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="background: -webkit-linear-gradient(-45deg, #f2f2f2 0%,#dddddd 50%,#ffffff 51%,#ffffff 71%,#f6f8fb 100%);">
     Меню
@@ -62,17 +63,18 @@
         </p>
         <p>
           <label for="time" class="badge badge-primary" data-icon="a">Время</label>
-          <input id="time" class="form-control" name="time" required="required" type="datetime-local"/>
+          <input id="time" class="form-control" name="time" required="required" type="text" pattern="[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]" placeholder="2017-02-14 19:30:00"/>
         </p>
         <p>
           <label for="sum" class="badge badge-primary" data-icon="e">Сумма</label>
           <input id="sum" class="form-control" name="sum" required="required" type="text"/>
         </p>
-        <p class="btn btn-primary">
-          <input type="submit" value="Добавить транзакцию"/>
+        <p>
+          <button class="btn btn-primary" type="submit">Добавить транзакцию</button>
         </p>
       </form>
     </div>
   </div>
 </div>
+</body>
 </html>

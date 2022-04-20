@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body>
+<body background="https://catherineasquithgallery.com/uploads/posts/2021-02/1613305037_115-p-sinii-neon-fon-126.jpg">
 <div class="btn-group">
     <button id="btn" type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="background: -webkit-linear-gradient(-45deg, #f2f2f2 0%,#dddddd 50%,#ffffff 51%,#ffffff 71%,#f6f8fb 100%);">
         Меню
@@ -45,35 +45,31 @@
 <br>
 <form>
     <p>
-        <label for="id" class="id" data-icon="n">Id</label>
-        <input id="id" name="id" required="required" type="text" th:value="${service.getId()}" readonly/>
+        <label for="id" class="badge badge-light" data-icon="n">Id</label>
+        <input id="id" name="id" class="form-control" required="required" type="text" th:value="${service.getId()}" readonly/>
     </p>
     <p>
-        <label for="fcn" class="form-control" data-icon="n">Название</label>
-        <input id="fcn" name="fcn" required="required" type="text" th:value="${service.getName()}"/>
+        <label for="fcn" class="badge badge-light" data-icon="n">Название</label>
+        <input id="fcn" name="name" class="form-control" required="required" type="text" th:value="${service.getName()}"/>
     </p>
     <p>
-        <label for="type1" class="form-control" data-icon="t" > Абонентская плата (в месяц) </label>
-        <input id="type1" name="type" required="required" type="number" th:value="${service.getPayPerMounth()}"/>
+        <label for="type1" class="badge badge-light" data-icon="t" > Абонентская плата (в месяц) </label>
+        <input id="type1" name="pay_per_month" class="form-control" required="required" type="text" th:value="${service.getPayPerMounth()}"/>
     </p>
     <p>
-        <label for="type2" class="form-control" data-icon="t" > Абонентская плата (в день) </label>
-        <input id="type2" name="type" required="required" type="number" th:value="${service.getPayPerDay()}"/>
+        <label for="type2" class="badge badge-light" data-icon="t" > Абонентская плата (в день) </label>
+        <input id="type2" name="pay_per_day" class="form-control" required="required" type="text" th:value="${service.getPayPerDay()}"/>
     </p>
     <p>
-        <label for="type3" class="form-control" data-icon="t" > Стоимость подключения </label>
-        <input id="type3" name="type" required="required" type="number" th:value="${service.getStartCost()}"/>
+        <label for="type3" class="badge badge-light" data-icon="t" > Стоимость подключения </label>
+        <input id="type3" name="start_cost" class="form-control" required="required" type="text" th:value="${service.getStartCost()}"/>
     </p>
     <p>
-        <label for="email" class="form-control" data-icon="e"> Состав </label>
-        <input id="email" name="email" required="required" type="text" th:value="${service.getStructure()}"/>
+        <label for="structure" class="badge badge-light" data-icon="e"> Состав </label>
+        <input id="structure" name="structure" class="form-control" required="required" type="text" th:value="${service.getStructure()}"/>
     </p>
-    <p class="upd_button">
-        <input type="submit" value="Сохранить изменения" th:formaction="@{'/update_service'}" formmethod="get"/>
-    </p>
-    <p class="del_button">
-        <input type="submit" value="Удалить услугу" th:formaction="@{'/delete_service'}" formmethod="get"/>
-    </p>
+        <button class="btn btn-primary" type="submit" th:formaction="@{'/update_service'}" formmethod="get">Сохранить изменения</button>
+        <button class="btn btn-primary" type="submit" th:formaction="@{'/delete_service'}" formmethod="get">Удалить услугу</button>
 </form>
 <div><a th:href="@{/service_history/registration(service_id=${service.getId()})}"><button id="num_button">Добавить договор об оказанной услуге</button></a></div>
 </body>

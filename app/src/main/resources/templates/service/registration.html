@@ -51,20 +51,20 @@
     <div id="subscribe" class="animate form">
       <form action="#" th:action="${'/add_service'}" method="get">
         <p>
-          <label for="fcn" class="badge badge-light" data-icon="n">Название</label>
-          <input id="fcn" class="form-control" name="fcn" required="required" type="text" placeholder="SMS" />
+          <label for="name" class="badge badge-light" data-icon="n">Название</label>
+          <input id="name" class="form-control" name="name" required="required" type="text" placeholder="SMS" />
         </p>
         <p>
           <label for="type1" class="badge badge-light" data-icon="t" > Абонентская плата (в месяц) </label>
-          <input id="type1" class="form-control" name="type" required="required" type="text" placeholder="100"/>
+          <input id="type1" class="form-control" name="pay_per_month" required="required" type="text" placeholder="100"/>
         </p>
         <p>
           <label for="type2" class="badge badge-light" data-icon="t" > Абонентская плата (в день) </label>
-          <input id="type2" class="form-control" name="type" required="required" type="text" placeholder="100"/>
+          <input id="type2" class="form-control" name="pay_per_day" required="required" type="text" placeholder="100"/>
         </p>
         <p>
           <label for="type3" class="badge badge-light" data-icon="t" > Стоимость подключения </label>
-          <input id="type3" class="form-control" name="type" required="required" type="text" placeholder="100"/>
+          <input id="type3" class="form-control" name="start_cost" required="required" type="text" placeholder="100"/>
         </p>
         <p>
           <label for="email" class="badge badge-light" data-icon="e"> Состав </label>

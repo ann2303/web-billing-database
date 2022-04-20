@@ -35,11 +35,11 @@ public class Service {
     @Column(name = "structure")
     private String structure;
 
-    public Service(Long id, String name, double payPerMounth, double payPerDay,
+    public Service(Long id, String name, double payPerMonth, double payPerDay,
                    double startCost, String structure) {
         this.id = id;
         this.name = name;
-        this.payPerMounth = payPerMounth;
+        this.payPerMounth = payPerMonth;
         this.payPerDay = payPerDay;
         this.startCost = startCost;
         this.structure = structure.replaceAll("\"", "")

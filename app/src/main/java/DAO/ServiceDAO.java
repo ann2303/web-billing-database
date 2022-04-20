@@ -17,6 +17,12 @@ public class ServiceDAO implements DAO<Service, Long> {
         @SuppressWarnings("unchecked")
         List<Service> result = query.list();
         session.close();
+        result.forEach(service -> {
+            service.setStructure(service.getStructure().replaceAll("\"", "")
+                    .replaceAll("\":", " :")
+                    .replaceAll("\\{", "")
+                    .replaceAll("}", ""));
+        });
         return result;
     }
 }
