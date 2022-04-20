@@ -80,7 +80,7 @@
         <td colspan="8"> No services :( </td>
     </tr>
     <tr th:each="service : ${services}">
-        <td><div><a th:href="@{'http://localhost:8080/service_page?id=' + ${service.getId()}}"><span th:text="${service.getName()}"> </span></a></div></td>
+        <td id="ref"><div><a th:href="@{'http://localhost:8080/service_page?id=' + ${service.getId()}}"><span th:text="${service.getName()}"> </span></a></div></td>
         <td><span th:text="${service.getPayPerMounth()}"> </span></td>
         <td><span th:text="${service.getPayPerDay()}"> </span></td>
         <td><span th:text="${service.getStartCost()}"> </span></td>
