@@ -1,33 +1,53 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link href=" https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css " rel="stylesheet"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.js"></script>
+  <style>
+    body {
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<div class="four"><h1>Регистрация</h1></div>
+<body background="https://catherineasquithgallery.com/uploads/posts/2021-03/1614646973_17-p-sovremennii-fon-dlya-fotoshopa-21.jpg">
 <div id="container_demo" >
   <a class="hiddenanchor" id="tosubscribe"></a>
   <a class="hiddenanchor" id="tologin"></a>
   <div id="wrapper">
     <div id="subscribe" class="animate form">
       <form action="#" th:action="${'/add_number'}" method="get">
-        <h1> Sign up </h1>
         <p>
-          <label for="client_id" class="client_id" data-icon="n">Client's id</label>
-          <input id="client_id" name="client_id" required="required" type="text" th:value="${client_id}" readonly/>
+          <label for="client_id" class="badge badge-light" data-icon="n">id</label>
+          <input id="client_id" class="form-control" name="client_id" required="required" type="text" th:value="${client_id}" readonly/>
         </p>
         <p>
-          <label for="number" class="number" data-icon="t" > Number </label>
-          <input id="number" name="number" required="required" type="text"/>
+          <label for="number" class="badge badge-light" data-icon="t" >Номер</label>
+          <input id="number" class="form-control" name="number" required="required" type="text"/>
         </p>
         <p>
-          <label for="balance" class="balance" data-icon="a"> Balance </label>
-          <input id="balance" name="balance" required="required" type="text"/>
+          <label for="balance" class="badge badge-light" data-icon="a">Баланс</label>
+          <input id="balance" class="form-control" name="balance" required="required" type="text"/>
         </p>
         <p>
-          <label for="max_credit" class="max_credit" data-icon="e"> Max credit </label>
-          <input id="max_credit" name="max_credit" required="required" type="text"/>
+          <label for="max_credit" class="badge badge-light" data-icon="e">Максимальный размер кредита</label>
+          <input id="max_credit" class="form-control" name="max_credit" required="required" type="text"/>
         </p>
-        <p class="button">
-          <input type="submit" value="Sign up"/>
+        <p class="ui-button">
+          <input type="submit" value="Зарегистрироваться"/>
         </p>
       </form>
     </div>
   </div>
 </div>
+</body>
 </html>
