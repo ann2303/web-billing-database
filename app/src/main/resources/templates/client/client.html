@@ -84,7 +84,7 @@
         <td colspan="8"> No clients :( </td>
     </tr>
     <tr th:each="client : ${clients}">
-        <td><div><a th:href="@{'http://localhost:8080/client_page?id=' + ${client.getId()}}"><span th:text="${client.getName()}"> </span></a></div></td>
+        <td><a id="ref" th:href="@{'http://localhost:8080/client_page?id=' + ${client.getId()}}"><span th:text="${client.getName()}"> </span></a></td>
         <td><span th:text="${client.getType()}"> </span></td>
         <td><span th:text="${client.getAddress()}"> </span></td>
         <td><span th:text="${client.getEmail()}"> </span></td>

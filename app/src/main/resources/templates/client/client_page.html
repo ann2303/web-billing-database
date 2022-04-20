@@ -58,12 +58,8 @@
     </p>
     </div>
 
-    <p class="upd_button">
-        <input type="submit" class="btn btn-info" value="Сохранить" th:formaction="@{'/update_client'}" formmethod="get"/>
-    </p>
-    <p class="del_button">
-        <input type="submit" class="btn btn-primary" value="Удалить клиента" th:formaction="@{'/delete_client'}" formmethod="get"/>
-    </p>
+        <button id="upd_button" type="submit" class="btn btn-info" th:formaction="@{'/update_client'}" formmethod="get">Сохранить</button>
+        <button id="del_button" type="submit" class="btn btn-primary" th:formaction="@{'/delete_client'}" formmethod="get">Удалить клиента</button>
 
 </form>
 <div><a th:href="@{/number/registration(id=${client.getId()})}"><button id="num_button">Добавить номер</button></a></div>
