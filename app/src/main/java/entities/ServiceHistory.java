@@ -5,6 +5,7 @@ import DAO.ServiceDAO;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "service_history")
@@ -21,16 +22,16 @@ public class ServiceHistory {
         return number;
     }
 
-    public Time getStartTime() {
+    public Timestamp getStartTime() {
         return startTime;
     }
 
-    public Time getEndTime() {
+    public Timestamp getEndTime() {
         return endTime;
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -43,12 +44,12 @@ public class ServiceHistory {
     private Long number;
 
     @Column(name = "connection_time")
-    private Time startTime;
+    private Timestamp startTime;
 
     @Column(name = "disconnection_time")
-    private Time endTime;
+    private Timestamp endTime;
 
-    public ServiceHistory(Long id, Long service_id, Long number, Time startTime, Time endTime) {
+    public ServiceHistory(Long id, Long service_id, Long number, Timestamp startTime, Timestamp endTime) {
 
         this.id = id;
         this.service_id = service_id;

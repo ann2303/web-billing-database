@@ -68,8 +68,8 @@
         <label for="structure" class="badge badge-light" data-icon="e"> Состав </label>
         <input id="structure" name="structure" class="form-control" required="required" type="text" th:value="${service.getStructure()}"/>
     </p>
-        <button class="btn btn-primary" type="submit" th:formaction="@{'/update_service'}" formmethod="get">Сохранить изменения</button>
-        <button class="btn btn-primary" type="submit" th:formaction="@{'/delete_service'}" formmethod="get">Удалить услугу</button>
+        <button id="upd_btn" name="upd_btn" class="btn btn-primary" type="submit" th:formaction="@{'/update_service'}" formmethod="get">Сохранить изменения</button>
+        <button id="del_btn" name="del_btn" class="btn btn-primary" type="submit" th:formaction="@{'/delete_service'}" formmethod="get">Удалить услугу</button>
 </form>
 <div><a th:href="@{/service_history/registration(service_id=${service.getId()})}"><button id="num_button">Добавить договор об оказанной услуге</button></a></div>
 </body>

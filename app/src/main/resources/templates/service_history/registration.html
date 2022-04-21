@@ -58,21 +58,17 @@
         </p>
         <p>
           <label for="type" class="badge badge-primary" data-icon="a">Id услуги</label>
-          <input id="type" class="form-control" name="type" required="required" type="text" th:value="${service_id}"/>
+          <input id="type" class="form-control" name="service_id" required="required" type="text" th:value="${service_id}"/>
         </p>
         <p>
           <label for="time1" class="badge badge-primary" data-icon="a">Время подключения</label>
-          <input id="time1" class="form-control" name="time" required="required" type="text" pattern="[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]" placeholder="2017-02-14 19:30:00"/>
+          <input id="time1" class="form-control" name="ctime" required="required" type="text" pattern="[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]" placeholder="2017-02-14 19:30:00"/>
         </p>
         <p>
           <label for="time2" class="badge badge-primary" data-icon="a">Время отключения</label>
-          <input id="time2" class="form-control" name="time" required="required" type="text" pattern="[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]" placeholder="2017-02-14 19:30:00"/>
+          <input id="time2" class="form-control" name="dtime" required="required" type="text" pattern="[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]" placeholder="2017-02-14 19:30:00"/>
         </p>
-        <p>
-          <label for="sum" class="badge badge-primary" data-icon="e">Сумма</label>
-          <input id="sum" class="form-control" name="sum" required="required" type="text"/>
-        </p>
-          <button class="btn btn-primary" type="submit">Регистрация договора</button>
+          <button name="reg" class="btn btn-primary" type="submit">Регистрация договора</button>
       </form>
     </div>
   </div>

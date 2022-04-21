@@ -52,29 +52,6 @@ public class NumberController {
 
     }
 
-    @RequestMapping(value = "/update_number", method = RequestMethod.GET)
-    public String updateNumber(@RequestParam(name = "number_id", required = true) Long number_id,
-                               @RequestParam(name = "client_id") Long client_id,
-                               @RequestParam(name = "balance") double balance,
-                               @RequestParam(name = "max_credit") double max_credit,
-                               Model model) {
-
-        try {
-            NumberDAO numberDAO = new NumberDAO();
-            Number number = new Number(number_id, client_id, balance, max_credit);
-            numberDAO.update(number);
-            String res = String.format("Number updated successfully with id = %d", number_id);
-            model.addAttribute("msg",
-                    res);
-            return "successful";
-        } catch (Exception e) {
-            model.addAttribute("error",
-                    "Can't update number.");
-            return "error";
-        }
-
-    }
-
 
     @RequestMapping(value = "/delete_number", method = RequestMethod.GET)
     public String deleteNumber(@RequestParam(name = "id", required = true) Long id,

@@ -36,15 +36,15 @@ public class ServiceHistoryController {
     @RequestMapping(value = "/add_service_history", method = RequestMethod.GET)
     public String addServiceHistory(@RequestParam(name = "number", required = true) Long number,
                             @RequestParam(name = "service_id") Long service_id,
-                            @RequestParam(name = "start_time") Time start_time,
-                            @RequestParam(name = "end_time") Time end_time,
+                            @RequestParam(name = "ctime") Timestamp start_time,
+                            @RequestParam(name = "dtime") Timestamp end_time,
                             Model model) {
 
         try {
             ServiceHistoryDAO service_historyDAO = new ServiceHistoryDAO();
             long id = service_historyDAO.getAll(ServiceHistory.class).stream()
-                    .map(ServiceHistory::getId).max(Long::compareTo).orElse(1L);
-            ServiceHistory service_history = new ServiceHistory(id, number, service_id, start_time, end_time);
+                    .map(ServiceHistory::getId).max(Long::compareTo).orElse(0L) + 1;
+            ServiceHistory service_history = new ServiceHistory(id, service_id, number, start_time, end_time);
             service_historyDAO.create(service_history);
             String res = String.format("ServiceHistory added successfully with id = %d", id);
             model.addAttribute("msg",

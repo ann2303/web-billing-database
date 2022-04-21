@@ -54,18 +54,18 @@
 <form action="/filter_clients" method="get">
     <br>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label" style="font-palette: light; color: azure;">Сортировка</label>
-        <select class="form-select" aria-label="Default select example" name="sort">
+        <label for="sort" class="form-label" style="font-palette: light; color: azure;">Сортировка</label>
+        <select id="sort" class="form-select" aria-label="Default select example" name="sort">
             <option value="По возрастанию">По возрастанию</option>
             <option value="По убыванию">По убыванию</option>
         </select>
     </div>
     <br>
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label" style="font-palette: light; color: azure;">Фильтр по имени</label>
-        <input type="text" class="form-control" name="name_filter" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="name_filter" class="form-label" style="font-palette: light; color: azure;">Фильтр по имени</label>
+        <input type="text" class="form-control" name="name_filter" id="name_filter" aria-describedby="emailHelp">
     </div>
-    <button type="submit" class="btn btn-light">Найти</button>
+    <button id="find" name="find" type="submit" class="btn btn-light">Найти</button>
 </form>
 <br>
 <br>

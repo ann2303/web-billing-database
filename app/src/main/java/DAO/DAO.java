@@ -50,7 +50,7 @@ public interface DAO<E, K> {
         }
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(entity);
+        E result = (E) session.save(entity);
         transaction.commit();
         session.close();
         return true;

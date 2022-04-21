@@ -67,10 +67,10 @@ public class ServiceController {
         try {
             ServiceDAO serviceDAO = new ServiceDAO();
             long id = serviceDAO.getAll(Service.class).stream()
-                    .map(Service::getId).max(Long::compareTo).orElse(1L);
+                    .map(Service::getId).max(Long::compareTo).orElse(0L) + 1;
             Service service = new Service(id, name, payPerMonth, payPerDay, startCost, structure);
             serviceDAO.create(service);
-            String res = String.format("service added successfully with id = %d", id);
+            String res = String.format("Service added successfully with id = %d", id);
             model.addAttribute("msg",
                     res);
             return "successful";

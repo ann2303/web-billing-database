@@ -60,7 +60,7 @@ public class ClientController {
         try {
             ClientDAO clientDAO = new ClientDAO();
             long id = clientDAO.getAll(Client.class).stream()
-                    .map(Client::getId).max(Long::compareTo).orElse(1L);
+                    .map(Client::getId).max(Long::compareTo).orElse(0L) + 1;
             Client client = new Client(id, fcn, type, address, email);
             clientDAO.create(client);
             String res = String.format("Client added successfully with id = %d", id);
