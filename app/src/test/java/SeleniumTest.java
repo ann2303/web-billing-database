@@ -1,4 +1,5 @@
 import DAO.*;
+import com.google.common.collect.Lists;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
@@ -10,12 +11,12 @@ import org.testng.annotations.*;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.openqa.selenium.support.ui.ExpectedConditions.stalenessOf;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class SeleniumTest {
 
@@ -96,8 +97,11 @@ public class SeleniumTest {
 
     @Test
     public void testClientsPage() {
-        URL = "http://localhost:8080/clients";
+        URL = "http://localhost:8080/";
         driver.get(URL);
+        wait.until(visibilityOfElementLocated(By.id("btn"))).click();
+        wait.until(visibilityOfElementLocated(By.id("clients"))).click();
+
         ServicePage servicePage = new ServicePage(driver);
         WebElement name_filter = servicePage.getName_filter();
         name_filter.sendKeys("а");
@@ -115,9 +119,10 @@ public class SeleniumTest {
         updateBtn.click();
         assertEquals(driver.getTitle(), "Successful");
 
-        URL = "http://localhost:8080/client/registration";
         driver.get(URL);
-        wait.until(visibilityOfElementLocated(By.name("fcn"))).sendKeys("new fcn");
+        wait.until(visibilityOfElementLocated(By.id("btn"))).click();
+        wait.until(visibilityOfElementLocated(By.id("client_reg"))).click();
+        wait.until(visibilityOfElementLocated(By.name("fcn"))).sendKeys("fcn_new");
         wait.until(visibilityOfElementLocated(By.name("type"))).sendKeys("new type");
         wait.until(visibilityOfElementLocated(By.name("address"))).sendKeys("new address");
         wait.until(visibilityOfElementLocated(By.name("email"))).sendKeys("new email");
@@ -128,8 +133,36 @@ public class SeleniumTest {
         Matcher matcher = pattern.matcher(str);
         matcher.find();
 
-        wait.until(visibilityOfElementLocated(By.id("del1"))).click();
+        wait.until(visibilityOfElementLocated(By.id("main_page"))).click(); // check added
+        wait.until(visibilityOfElementLocated(By.id("btn"))).click();
+        wait.until(visibilityOfElementLocated(By.id("clients"))).click();
+        ServicePage servicePage1 = new ServicePage(driver);
+        WebElement name_filter1 = servicePage1.getName_filter();
+        name_filter1.sendKeys("fcn_new");
+        WebElement findBtn1 = servicePage.getFindBtn();
+        findBtn1.click();
+        WebElement table1 = wait.until(visibilityOfElementLocated(By.className("table")));
+        List<WebElement> tableRows1 = table1.findElements(By.tagName("tr"));
+        assertEquals(tableRows1.size(), 2); // table header + 1 row
+        assertNotEquals(tableRows1.get(1).getText(), "No clients :(");
+
+        WebElement href1 = tableRows1.get(1).findElements(By.tagName("td")).get(0);
+        href1.findElement(By.tagName("a")).click();
+
+        wait.until(visibilityOfElementLocated(By.id("del_button"))).click();
         assertEquals(driver.getTitle(), "Successful");
+        wait.until(visibilityOfElementLocated(By.id("main_page"))).click(); // check
+        wait.until(visibilityOfElementLocated(By.id("btn"))).click();
+        wait.until(visibilityOfElementLocated(By.id("clients"))).click();
+        ServicePage servicePage2 = new ServicePage(driver);
+        WebElement name_filter2 = servicePage2.getName_filter();
+        name_filter2.sendKeys("fcn_new");
+        WebElement findBtn2 = servicePage.getFindBtn();
+        findBtn2.click();
+        WebElement table2 = wait.until(visibilityOfElementLocated(By.className("table")));
+        List<WebElement> tableRows2 = table2.findElements(By.tagName("tr"));
+        assertEquals(tableRows2.size(), 2); // table header + no clients
+        assertEquals(tableRows2.get(1).getText(), "No clients :(");
     }
 
     @Test
@@ -157,7 +190,7 @@ public class SeleniumTest {
 
         URL = "http://localhost:8080/service/registration";
         driver.get(URL);
-        wait.until(visibilityOfElementLocated(By.name("name"))).sendKeys("new name");
+        wait.until(visibilityOfElementLocated(By.name("name"))).sendKeys("service_name");
         wait.until(visibilityOfElementLocated(By.name("pay_per_month"))).sendKeys("100");
         wait.until(visibilityOfElementLocated(By.name("pay_per_day"))).sendKeys("100");
         wait.until(visibilityOfElementLocated(By.name("start_cost"))).sendKeys("100");
@@ -168,9 +201,36 @@ public class SeleniumTest {
         String str = driver.findElement(By.id("msg")).getText();
         Matcher matcher = pattern.matcher(str);
         matcher.find();
+        wait.until(visibilityOfElementLocated(By.id("main_page"))).click(); // check
+        wait.until(visibilityOfElementLocated(By.id("btn"))).click();
+        wait.until(visibilityOfElementLocated(By.id("services"))).click();
+        ServicePage servicePage1 = new ServicePage(driver);
+        WebElement name_filter1 = servicePage1.getName_filter();
+        name_filter1.sendKeys("service_name");
+        WebElement findBtn1 = servicePage.getFindBtn();
+        findBtn1.click();
+        WebElement table1 = wait.until(visibilityOfElementLocated(By.className("table")));
+        List<WebElement> tableRows1 = table1.findElements(By.tagName("tr"));
+        assertEquals(tableRows1.size(), 2); // table header + 1 row
+        assertNotEquals(tableRows1.get(1).getText(), "No services :(");
 
-        wait.until(visibilityOfElementLocated(By.id("del3"))).click();
+        WebElement href1 = tableRows1.get(1).findElements(By.tagName("td")).get(0);
+        href1.findElement(By.tagName("a")).click();
+
+        wait.until(visibilityOfElementLocated(By.id("del_btn"))).click();
         assertEquals(driver.getTitle(), "Successful");
+        wait.until(visibilityOfElementLocated(By.id("main_page"))).click();
+        wait.until(visibilityOfElementLocated(By.id("btn"))).click();
+        wait.until(visibilityOfElementLocated(By.id("services"))).click();
+        ServicePage servicePage2 = new ServicePage(driver);
+        WebElement name_filter2 = servicePage2.getName_filter();
+        name_filter2.sendKeys("service_name");
+        WebElement findBtn2 = servicePage.getFindBtn();
+        findBtn2.click();
+        WebElement table2 = wait.until(visibilityOfElementLocated(By.className("table")));
+        List<WebElement> tableRows2 = table2.findElements(By.tagName("tr"));
+        assertEquals(tableRows2.size(), 2); // table header
+        assertEquals(tableRows2.get(1).getText(), "No services :(");
     }
 
     @Test
@@ -197,6 +257,14 @@ public class SeleniumTest {
         wait.until(visibilityOfElementLocated(By.id("btn"))).click();
         wait.until(visibilityOfElementLocated(By.id("numbers"))).click();
         assertEquals(driver.getTitle(), "Numbers");
+        WebElement table1 = wait.until(visibilityOfElementLocated(By.className("table")));
+        List<WebElement> tableRows1 = table1.findElements(By.tagName("tr"));
+        List<String> l = Lists.newArrayList("89375082191", "Ссылка владельца", "101.0", "5001.0"); // check content
+        assertTrue(tableRows1.stream()
+                .map(row -> row.findElements(By.tagName("td")).stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList()))
+                .anyMatch(list -> list.equals(l)));
     }
 
     @Test
@@ -229,6 +297,19 @@ public class SeleniumTest {
         wait.until(visibilityOfElementLocated(By.id("btn"))).click();
         wait.until(visibilityOfElementLocated(By.id("service_history"))).click();
         assertEquals(driver.getTitle(), "ServiceHistory");
+        WebElement table1 = wait.until(visibilityOfElementLocated(By.className("table")));
+        List<WebElement> tableRows1 = table1.findElements(By.tagName("tr"));
+        List<String> l = Lists.newArrayList("7",
+                "Service's page",
+                "7",
+                "2021-10-09 12:00:00.0",
+                "2021-11-04 12:00:00.0"); // check content
+        assertTrue(tableRows1.stream()
+                .map(row -> row.findElements(By.tagName("td")).stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList()))
+                .anyMatch(list -> list.equals(l)));
+
     }
 
 
@@ -258,8 +339,14 @@ public class SeleniumTest {
         wait.until(visibilityOfElementLocated(By.id("btn"))).click();
         wait.until(visibilityOfElementLocated(By.id("transactions"))).click();
         assertEquals(driver.getTitle(), "Журнал транзакций");
+        WebElement table1 = wait.until(visibilityOfElementLocated(By.className("table")));
+        List<WebElement> tableRows1 = table1.findElements(By.tagName("tr"));
+        List<String> l = Lists.newArrayList("89375082191", "2021-10-05 12:00:00.0", "списание", "90.0"); // check content
+        assertTrue(tableRows1.stream()
+                .map(row -> row.findElements(By.tagName("td")).stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList()))
+                .anyMatch(list -> list.equals(l)));
     }
-
-
 
 }
