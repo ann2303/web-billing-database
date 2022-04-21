@@ -41,6 +41,7 @@ public class NumberController {
             Number number = new Number(number_id, client_id, balance, max_credit);
             numberDAO.create(number);
             String res = String.format("Number added successfully with id = %d", number_id);
+            model.addAttribute("id", number_id);
             model.addAttribute("msg",
                     res);
             return "successful";

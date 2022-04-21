@@ -7,7 +7,29 @@
 
 
 <body>
+<header class="sticky">
+    <nav class="navbar sticky-top navbar-dark bg-dark">
+        <div class="btn-group" role="group" aria-label="top buttons">
+            <a id="page_error_root_page_button" href="/" class="btn btn-outline-warning" role="button">Главная</a>
+        </div>
+    </nav>
+</header>
 <h1 id="msg" class="display-1"> <span th:text="${msg}"> </span></h1>
+<div th:if="${msg.contains('Client added')}">
+    <a id="del1" th:href="@{'/delete_client?id=' + ${id}}">Удалить клиента</a>
+</div>
+<div th:if="${msg.contains('Number added')}">
+    <a id="del2" th:href="@{'/delete_number?id=' + ${id}}">Удалить номер</a>
+</div>
+<div th:if="${msg.contains('Service added')}">
+    <a id="del3" th:href="@{'/delete_service?id=' + ${id}}">Удалить услугу</a>
+</div>
+<div th:if="${msg.contains('ServiceHistory added')}">
+    <a id="del4" th:href="@{'/delete_service_history?id=' + ${id}}">Удалить договор</a>
+</div>
+<div th:if="${msg.contains('Transactions added')}">
+    <a id="del5" th:href="@{'/delete_transactions?id=' + ${id}}">Удалить транзакцию</a>
+</div>
 <br><br>
 <img src="https://1.bp.blogspot.com/-v_mXQGvNhNI/UEI5E6wYgqI/AAAAAAAAVTE/uu_C6YpmpRk/s1600/ff809c91f14c54cbe7e1aa1b21a1121f9c+18468.jpg" class="rounded mx-auto d-block" alt="Responsive image">
 </body>

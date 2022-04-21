@@ -46,6 +46,7 @@ public class ServiceHistoryController {
                     .map(ServiceHistory::getId).max(Long::compareTo).orElse(0L) + 1;
             ServiceHistory service_history = new ServiceHistory(id, service_id, number, start_time, end_time);
             service_historyDAO.create(service_history);
+            model.addAttribute("id", id);
             String res = String.format("ServiceHistory added successfully with id = %d", id);
             model.addAttribute("msg",
                     res);

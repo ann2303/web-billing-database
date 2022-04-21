@@ -64,6 +64,7 @@ public class ClientController {
             Client client = new Client(id, fcn, type, address, email);
             clientDAO.create(client);
             String res = String.format("Client added successfully with id = %d", id);
+            model.addAttribute("id", id);
             model.addAttribute("msg",
                     res);
             return "successful";

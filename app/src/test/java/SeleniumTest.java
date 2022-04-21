@@ -67,8 +67,8 @@ public class SeleniumTest {
 
     @BeforeClass
     public void setup() {
-        wait = new WebDriverWait(driver,10);
-        driver.manage().timeouts().pageLoadTimeout(10, SECONDS);
+        wait = new WebDriverWait(driver,15);
+        driver.manage().timeouts().pageLoadTimeout(15, SECONDS);
         driver.manage().window().setSize(new Dimension(1000, 1000));
         System.setProperty("webdriver.chrome.driver", "/usr/lib/chromium-browser/chromedriver");
     }
@@ -128,8 +128,7 @@ public class SeleniumTest {
         Matcher matcher = pattern.matcher(str);
         matcher.find();
 
-        URL = "http://localhost:8080/delete_client?id=" + matcher.group(1);
-        driver.get(URL);
+        wait.until(visibilityOfElementLocated(By.id("del1"))).click();
         assertEquals(driver.getTitle(), "Successful");
     }
 
@@ -170,8 +169,7 @@ public class SeleniumTest {
         Matcher matcher = pattern.matcher(str);
         matcher.find();
 
-        URL = "http://localhost:8080/delete_service?id=" + matcher.group(1);
-        driver.get(URL);
+        wait.until(visibilityOfElementLocated(By.id("del3"))).click();
         assertEquals(driver.getTitle(), "Successful");
     }
 
@@ -185,14 +183,13 @@ public class SeleniumTest {
         href.findElement(By.tagName("a")).click();
         wait.until(visibilityOfElementLocated(By.id("num_button"))).click();
 
-        wait.until(visibilityOfElementLocated(By.name("number"))).sendKeys("8888");
+        wait.until(visibilityOfElementLocated(By.name("number"))).sendKeys("88888");
         wait.until(visibilityOfElementLocated(By.name("balance"))).sendKeys("30");
         wait.until(visibilityOfElementLocated(By.name("max_credit"))).sendKeys("1000000");
         wait.until(visibilityOfElementLocated(By.id("ui-button"))).click();
         assertEquals(driver.getTitle(), "Successful");
 
-        URL = "http://localhost:8080/delete_number?id=8888";
-        driver.get(URL);
+        wait.until(visibilityOfElementLocated(By.id("del2"))).click();
         assertEquals(driver.getTitle(), "Successful");
 
         URL = "http://localhost:8080/";
@@ -224,8 +221,7 @@ public class SeleniumTest {
         Matcher matcher = pattern.matcher(str);
         matcher.find();
 
-        URL = "http://localhost:8080/delete_service_history?id=" + matcher.group(1);
-        driver.get(URL);
+        wait.until(visibilityOfElementLocated(By.id("del4"))).click();
         assertEquals(driver.getTitle(), "Successful");
 
         URL = "http://localhost:8080/";
@@ -254,8 +250,7 @@ public class SeleniumTest {
         Matcher matcher = pattern.matcher(str);
         matcher.find();
 
-        URL = "http://localhost:8080/delete_transactions?id=" + matcher.group(1);
-        driver.get(URL);
+        wait.until(visibilityOfElementLocated(By.id("del5"))).click();
         assertEquals(driver.getTitle(), "Successful");
 
         URL = "http://localhost:8080/";

@@ -71,6 +71,7 @@ public class ServiceController {
             Service service = new Service(id, name, payPerMonth, payPerDay, startCost, structure);
             serviceDAO.create(service);
             String res = String.format("Service added successfully with id = %d", id);
+            model.addAttribute("id", id);
             model.addAttribute("msg",
                     res);
             return "successful";

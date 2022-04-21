@@ -40,6 +40,7 @@ public class TransactionsController {
                     .map(Transactions::getId).max(Long::compareTo).orElse(1L);
             Transactions transactions = new Transactions(id, number, type, sum, time);
             transactionsDAO.create(transactions);
+            model.addAttribute("id", id);
             String res = String.format("Transactions added successfully with id = %d", id);
             model.addAttribute("msg",
                     res);
